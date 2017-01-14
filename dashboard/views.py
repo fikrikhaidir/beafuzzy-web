@@ -15,6 +15,9 @@ from django.contrib.gis.geoip2 import GeoIP2
 @login_required
 def dashboard_home(request):
     kota = GeoIP2().city('36.73.70.173')
+    kotaa = request.META.get('REMOTE_ADDR')
+    # kota = GeoIP2().city(kotaa)
+
     print request.META.get('REMOTE_ADDR')
     print request.META.get('REMOTE_HOST')
     kota,provinsi,negara = kota['city'],kota['region'],kota['country_name']
@@ -143,7 +146,7 @@ def adm_berita(request):
 @login_required
 def adm_profile(request):
     akun = request.user
-    dataAdmin = data_admin.objects.get(akun=akun)
+    dataAdmin = data_admin.objects.filter(akun=akun)
     if dataAdmin:
         akun=request.user
         data = data_admin.objects.get(akun=akun)
