@@ -159,6 +159,12 @@ def adm_profile(request):
             'akun':akun,
         }
     else:
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.akun = request.user
+            instance.daftar = True
+            instance.tgl_daftar = timezone.now().date()
+            instance.save()
         context ={
             'form':form,
 
