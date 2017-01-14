@@ -1,0 +1,12 @@
+dj-database-url==0.4.2
+Django==1.9.9
+django-crispy-forms==1.6.0
+geoip2==2.4.2
+gunicorn==19.6.0
+ipaddress==1.0.18
+maxminddb==1.2.3
+Pillow==3.4.2
+psycopg2==2.6.2
+python-decouple==3.0
+requests==2.12.4
+whitenoise==3.2.3

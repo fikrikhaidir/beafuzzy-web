@@ -1,0 +1,72 @@
+{% extends 'dash/dashbase.html' %}
+
+{% block content %}
+
+
+<div class="page-header">
+    <h1>Profil {{namaPanggilan}} <!--<small>Data Pribadi dan Kelengkapan Syarat</small>--></h1>
+</div>
+<div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-1 col-md-1">
+      </div>
+      <div class="col-lg-10 col-md-10">
+        <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">{{ instance.nama }}</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src=" " class="img-circle img-responsive"> </div>
+
+                  <div class=" col-md-9 col-lg-9 ">
+                    <table class="table table-user-information">
+                      <tbody>
+                        <tr>
+                          <td>Fakultas:</td>
+                          <td><b>{{instance.fakultas}}</b></td>
+                        </tr>
+                        <tr>
+                          <td>Program Studi:</td>
+                          <td>{{instance.prodi}}</td>
+                        </tr>
+                        <tr>
+                          <td>NIM :</td>
+                          <td>{{instance.nim}}</td>
+                        </tr>
+
+                           <tr>
+                               <tr>
+                          <td>Tanggal Lahir :</td>
+                          <td>{{instance.TanggalLahir}}</td>
+                        </tr>
+                          <tr>
+                          <td>Alamat :</td>
+                          <td>{{instance.alamat}}</td>
+                        </tr>
+                        <tr>
+                          <td>Email :</td>
+                          <td><a href="mailto:info@support.com">{{email}}</a></td>
+                        </tr>
+                          <td>Phone Number</td>
+                          <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
+                          </td>
+
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+                   <div class="panel-footer">
+                          <a href='{% url "dashboard:adm_validasi" id=instance.id %}' type="button" class="btn btn-sm btn-primary"><i class="fa fa-check-square"></i>&nbsp;Validasi</a>
+                          <span class="pull-right">
+                              <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
+                              <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                          </span>
+                      </div>
+
+            </div>
+{% endblock content %}

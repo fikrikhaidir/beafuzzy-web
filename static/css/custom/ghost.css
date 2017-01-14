@@ -1,0 +1,59 @@
+.ghost-btn {
+    margin-top: 75px;
+    margin-right: 20px;
+    /*margin-left: 10px;*/
+    /*padding: .2em 1.5em .2em 1.5em;*/
+    padding: 3px 28px 3px 28px;
+    font-family: "WorkSans";
+    font-weight: 600;
+    font-size: 14px !important;
+    display: inline-block;
+    text-decoration: none;
+    border: 2.5px solid white;
+    height: 36px;
+    line-height: 36px;
+    color: white;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 0px !important;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    font-size: 0.7em;
+    /*padding: .2em 1.5em;*/
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    background: rgba(111, 111, 111, 0.35);
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    cursor: pointer;
+    zoom: 1;
+    -webkit-backface-visibility: hidden;
+    position: relative;
+    border-radius: 0px !important;
+}
+
+.ghost-btn:hover {
+    -webkit-transition: 0.2s ease;
+    -moz-transition: 0.2s ease;
+    -o-transition: 0.2s ease;
+    transition: 0.2s ease;
+    background-color: white;
+    color :gray;
+}
+
+.ghost-btn:focus {
+    outline: none;
+}
+
+#ghostReg{
+  color: #FFEB3B;
+  border: 2.5px solid #FFEB3B;
+
+}
+#ghostReg:hover{
+  background-color: white;
+  border: 2.5px solid white;
+  color : gray;
+}

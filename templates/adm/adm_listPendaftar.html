@@ -1,0 +1,89 @@
+{% extends 'dash/dashbase.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Pendaftar Beasiswa <small>Daftar Lengkap Pelamar Beasiswa</small></h1>
+</div>
+
+
+<div class="row">
+
+        <nav class="navbar-search query" role="query">
+            <div class="container-fluid">
+                <div class="row row-list-search">
+                <!-- <div class='col-md-1'>
+                </div> -->
+                <div class='col-md-12'>
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="javascript:void(0);">Cari Pendaftar</a>
+
+                </div>
+                <div class="collapse navbar-collapse" id="">
+                    <div class="navbar-form navbar-left">
+                        <input type="text" class="form-control" />
+                        <button class="btn btn-default">Cari !</button>
+                    </div>
+                    <!-- <button class="btn btn-primary create pull-right">添加账号</button> -->
+                </div>
+
+                </div>
+                <!-- <div class='col-md-1'>
+                </div> -->
+                </div>
+
+            </div>
+        </nav>
+        <!-- <div class="col-md-1">
+
+      </div> -->
+        <div class="table-responsive col-md-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nama Lengkap</th><th>Fakultas</th><th>Status</th>
+                        <th>Program Studi</th><th>Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for obj in object_list %}
+                    <tr>
+                        <td><p>{{obj.nama}}</p></td>
+                        <td><p>{{ obj.fakultas }}</p></p></td>
+                        {% if obj.valid %}
+                        <td><p><span class="label label-success">Valid</span></p></td>
+                        {% else %}
+                        <td><p><span class="label label-danger">Invalid</span></p></td>
+                        {% endif %}
+                        <td><p>{{ obj.prodi }}</p></td>
+                        <td class="col-md-2"><p>
+                          {% if obj.valid %}
+                          <button class="btn btn-success" href="" disabled="disabled"><i class="fa fa-check-square-o fa-lg"></i> &nbspValidasi &nbsp;&nbsp;&nbsp;&nbsp;</button>
+                          {% else %}
+                          <a class="btn btn-success" href="{% url 'dashboard:adm_profile_detail' id=obj.id %}"><i class="fa fa-check-square-o fa-lg"></i> &nbspValidasi &nbsp;&nbsp;&nbsp;&nbsp;</a>
+                          {% endif %}
+                        </p></td>
+                    </tr>
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="col-md-1">
+
+      </div> -->
+        <!-- <div class="pull-right">
+            <ul class="pagination">
+                <li><a href="#">«</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">»</a></li>
+            </ul>
+        </div> -->
+	</div>
+
+{% endblock %}

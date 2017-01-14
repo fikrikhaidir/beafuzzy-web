@@ -1,0 +1,129 @@
+@font-face {
+    font-family: 'RobotoLight';
+    src: url('../fonts/Roboto-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RobotoRegular';
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'WorkSansLight';
+    src: url('../fonts/WorkSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'WorkSans';
+    src: url('../fonts/WorkSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'WorkSansThin';
+    src: url('../fonts/WorkSans-Thin.ttf') format('truetype');
+}
+
+html, body {
+    font-family: "RobotoRegular", sans-serif;
+    height: 100% !important;
+    margin: 0 !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed;
+    background-color: white;
+}
+
+
+/*body {
+    background-image: url('../../img/bg4b.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}*/
+
+.navbar {
+    background-color: white;
+    border-width: 0px;
+    border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    padding-right: 55px;
+    padding-left: 80px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+@media (max-width: 778px) {
+    .navbar {
+        background-color: white;
+        border-width: 0px;
+        border-radius: 0 !important;
+        -moz-border-radius: 0 !important;
+        padding-right: 13px;
+        padding-left: 25px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+}
+
+#navbar-text {
+    font-family: 'WorkSans';
+    font-weight: 400;
+    font-size: 24px !important;
+    color: #616161 !important;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.navbar-brand {
+    float: none;
+}
+
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 23px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.navbar-nav> li> a {
+    padding-top: 32px;
+    padding-bottom: 15px;
+}
+
+.container-navbar-landing {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.jumbotron {
+    background-color: transparent;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.jumbotron h1{
+    color: white;
+    font-weight: 600 !important;
+    font-family: 'WorkSansLight' !important;
+}
+
+.jumbotron p{
+  color : white;
+  font-weight: lighter !important;
+  font-family: 'WorkSansLight' !important;
+}
+
+#bold {
+    font-family: 'WorkSans' !important;
+}
+
+
+#footer {
+    font-family: "WorkSans";
+    color: white;
+    font-size: 12px;
+    float: right;
+    padding-right: 25px;
+}

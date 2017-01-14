@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom/custom.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom/ghost.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom/modal.css' %}" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon/favicon.ico' %}" />
+
+
+    <title>Beafuzzy</title>
+</head>
+
+<body>
+    <div class='container-navbar-landing'>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+                <a class="navbar-brand" href="{% url 'accounts:homepage' %}">
+                    <img src="{% static 'img/logo1.png' %}" height="40px" width="40px" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'accounts:about' %}" id="navbar-text">About</a></li>
+                    <li><a href="#login" id="navbar-text" role="button" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="loginmodal-container">
+					<h1>Masuk Dashboard</h1><br>
+				  <form method='POST' action=''>
+            {% csrf_token %}
+            {{formLog|crispy}}
+					<input type="submit" name="login" class="login loginmodal-submit" value="{{title}}">
+				  </form>
+
+				  <div class="login-help">
+					<a href="#">Register</a> - <a href="#">Forgot Password</a>
+				  </div>
+				</div>
+			</div>
+		  </div>
+
+
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="footer navbar-fixed-bottom">
+        <div>
+            <a id="footer">2016 by Muh Fikri Khaidir</span> </a>
+        </div>
+    </div>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script> -->
+    <script src="{% static 'js/jquery/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+
+</html>

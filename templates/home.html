@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+<style>
+body {
+  background-image: url("{% static 'img/bg4b.jpg' %}");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+<div class="container-fluid">
+
+
+<div class="jumbotron">
+  <h1>Raih Mimpimu !</h1>
+  <p><span id='bold'>Beafuzzy membantumu untuk melamar beasiswa dengan penyajian data yang real-time.</span></p>
+  <a class="btn ghost-btn" href="{% url 'accounts:about' %}"> SELENGKAPNYA </a>
+  <a class="btn ghost-btn" id ='ghostReg' href="{% url 'accounts:register' %}"> &nbsp;&nbsp;REGISTRASI&nbsp;&nbsp; </a>
+
+</div>
+
+</div>
+
+
+
+{% endblock %}
