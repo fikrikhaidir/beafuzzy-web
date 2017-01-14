@@ -14,9 +14,9 @@ from django.contrib.gis.geoip2 import GeoIP2
 
 @login_required
 def dashboard_home(request):
-    kota = GeoIP2().city('36.73.70.173')
+    # kota = GeoIP2().city('36.73.70.173')
     kotaa = request.META.get('REMOTE_ADDR')
-    # kota = GeoIP2().city(kotaa)
+    kota = GeoIP2().city(kotaa)
 
     print request.META.get('REMOTE_ADDR')
     print request.META.get('REMOTE_HOST')
@@ -161,7 +161,7 @@ def adm_profile(request):
     else:
         context ={
             'form':form,
-            
+
         }
 
     context['username']=request.session['nama']
