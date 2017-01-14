@@ -152,3 +152,6 @@ MEDIA_ROOT = os.path.join(os.path.dirname(PROJECT_ROOT),'media_cdn')
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL='dashboard/'
 GEOIP_PATH = os.path.join(os.path.dirname(PROJECT_ROOT),'geoip')
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
