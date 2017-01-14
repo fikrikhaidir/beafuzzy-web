@@ -15,7 +15,7 @@ from django.contrib.gis.geoip2 import GeoIP2
 @login_required
 def dashboard_home(request):
     # kota = GeoIP2().city('36.73.70.173')
-    kotaa = request.META.get('REMOTE_ADDR')
+    kotaa = request.META.get('HTTP_X_FORWARDED_FOR')
     kota = GeoIP2().city(kotaa)
 
     print request.META.get('REMOTE_ADDR')
