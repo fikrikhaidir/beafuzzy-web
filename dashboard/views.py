@@ -147,6 +147,7 @@ def adm_berita(request):
 def adm_profile(request):
     akun = request.user
     dataAdmin = data_admin.objects.filter(akun=akun)
+    form = isi_data_admin(request.POST or None, request.FILES or None)
     if dataAdmin:
         akun=request.user
         data = data_admin.objects.get(akun=akun)
@@ -156,6 +157,11 @@ def adm_profile(request):
             'form':form,
             'dataUser':data,
             'akun':akun,
+        }
+    else:
+        context ={
+            'form':form,
+            
         }
 
     context['username']=request.session['nama']
