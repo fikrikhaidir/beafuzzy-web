@@ -155,3 +155,5 @@ GEOIP_PATH = os.path.join(os.path.dirname(PROJECT_ROOT),'geoip')
 
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
