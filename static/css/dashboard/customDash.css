@@ -177,12 +177,13 @@ html, body {
 .fa-signout-custom{
   font-size: 28px;
 }
-
+#logoutBtn{
+  color: white;
+}
 .list-group {
     padding-left: 0;
     margin-bottom: 40px;
 }
-
 .list-group-item {
     position: relative;
     display: block;
@@ -190,7 +191,6 @@ html, body {
      background-color: transparent;
      border: 0px solid #ddd;
 }
-
 .page-header > h1{
   color: #424242;
   font-size: 42px;
@@ -215,21 +215,8 @@ html, body {
     border: 1px solid transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    /* box-shadow: 0 1px 1px rgba(0, 0, 0, .05); */
     box-shadow: 0 8px 23px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
 }
-/*@media (max-width: 778px){
-  .panel{
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-  box-shadow: 0 8px 23px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
-
-}
-}*/
-
 .row-list-search{
   margin-top: 50px !important;
   z-index: 1000;
