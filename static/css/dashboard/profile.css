@@ -10,7 +10,7 @@
 @media (max-width: 778px){
   .profile-sidebar {
     padding: 20px 0 5px 0;
-    margin-top: 0px;
+    /*margin-top: 30px;*/
     background: #FAFAFA;
   }
 }
