@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     #third-party
     'crispy_forms',
+    'pagedown',
     #local
     'accounts',
     # 'landing',tahun_lahir_pilihan = [thn for thn in range(1990,2020)]
