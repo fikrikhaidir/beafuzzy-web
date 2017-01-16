@@ -98,6 +98,7 @@
 
     #sidebar-wrapper {
         width: 250px;
+        position: fixed;
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -106,7 +107,7 @@
 
     #page-content-wrapper {
         padding: 20px;
-        position: fixed;;
+        position: relative;
         margin-top: -24px !important;
         box-shadow: 12px -8px 13px -4px rgba(0,  0, 0, 0.18), -5px -8px 35px -4px rgba(0, 0, 0, 0.18);
     }
