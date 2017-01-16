@@ -53,8 +53,6 @@ class isi_data_admin(forms.ModelForm):
 class form_berita(forms.ModelForm):
     judul = forms.CharField(label='Judul Berita', error_messages={'required': 'Mohon diisi judul'})
     image = forms.ImageField(label='Sematkan Gambar', error_messages={'required': 'Mohon diisi gambar'})
-    publish = forms.DateField(label='publish', error_messages={'required': 'Mohon diisi tanggal publikasi'},
-                              widget=forms.TextInput(attrs={'class': 'datepicker'}))
     content = forms.CharField(widget=PagedownWidget())
     class Meta:
         model = berita
@@ -62,6 +60,4 @@ class form_berita(forms.ModelForm):
             'judul',
             'image',
             'content',
-            'draft',
-            'publish',
         ]

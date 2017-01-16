@@ -90,12 +90,10 @@ class hasil_kalkulasi(models.Model):
 
 class berita(models.Model):
     judul = models.CharField(default='', max_length=200,null=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
-    slug = models.SlugField(unique=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+    slug = models.SlugField(unique=True,max_length=255)
     image = models.ImageField(upload_to='upload/berita', default='')
     content = models.TextField(null=False)
-    draft = models.BooleanField(default=False)
-    publish = models.DateField(auto_now=False, auto_now_add=False)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
@@ -106,7 +104,7 @@ class berita(models.Model):
         ordering = ["-timestamp"]
 
     def get_absolute_url(self):
-        return reverse("detail_berita", kwargs={"slug": self.slug})
+        return reverse("dashboard:detail_berita", kwargs={"slug": self.slug})
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.judul)

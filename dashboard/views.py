@@ -3,8 +3,8 @@ from django.http import HttpResponse, Http404,HttpRequest
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import isi_data_member,isi_data_admin
-from .models import data_member,data_admin,hasil_kalkulasi
+from .forms import isi_data_member,isi_data_admin,form_berita
+from .models import data_member,data_admin,hasil_kalkulasi,berita
 from django.utils import timezone
 from django import template
 import datetime
@@ -71,11 +71,17 @@ def dashboard_home(request):
     return render(request,"dash/dash_home.html",(context))
 
 @login_required
-def berita(request):
+def listBerita(request):
+    if berita.objects.all():
+        instance = berita.objects.all()
+    else:
+        instance = None
     context={
         'username':request.session['nama'],
         'fakultas':request.session['fakultas'],
+        'instance':instance
     }
+
     return render(request,"dash/dash_berita.html",(context))
 
 @login_required
@@ -140,8 +146,20 @@ def pengaturan(request):
 
 @login_required
 def adm_berita(request):
-    context={}
-    return render(request,"dash/adm_berita.html",(context))
+    akun = request.user
+    if not akun.is_superuser and not akun.is_staff:
+        return redirect('dashboard:berita')
+    form = form_berita(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.author = request.user
+        instance.save()
+        return redirect('dashboard:adm_berita')
+    context={
+        'formBerita' : form,
+    }
+
+    return render(request,"adm/adm_berita.html",(context))
 
 @login_required
 def adm_profile(request):
