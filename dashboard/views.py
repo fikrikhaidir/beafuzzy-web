@@ -72,7 +72,7 @@ def dashboard_home(request):
 
 @login_required
 def listBerita(request):
-    if berita.objects.all():
+    if berita.objects.all().exists():
         instance = berita.objects.all()
     else:
         instance = None
@@ -136,6 +136,14 @@ def profile(request):
     context['fakultas']=request.session['fakultas']
     return render(request,"dash/dash_profile.html",(context))
 
+@login_required
+def faq(request):
+    context={
+        'username':request.session['nama'],
+        'fakultas':request.session['fakultas'],
+    }
+    
+    return render(request,"dash/dash_faq.html",(context))
 @login_required
 def pengaturan(request):
     context={

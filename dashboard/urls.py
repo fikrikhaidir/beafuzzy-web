@@ -9,12 +9,13 @@ urlpatterns = [
     url(r'^pengumuman/$', views.pengumuman, name='pengumuman'),
     url(r'^timeline/$', views.timeline, name='timeline'),
     url(r'^pengaturan/$', views.pengaturan, name='pengaturan'),
+    url(r'^faq/$', views.faq, name='faq'),
+    
     url(r'^adm/pendaftar/$', views.adm_listPendaftar, name='listPendaftar'),
     url(r'^adm/profile/$', views.adm_profile, name='adm_profile'),
     url(r'^adm/profile/(?P<id>\d+)/$', views.adm_profile_detail, name='adm_profile_detail'),
     url(r'^adm/profile/validasi/(?P<id>\d+)/$', viewslong.validasi_pendaftar, name='adm_validasi'),
     url(r'^adm/profile/terima/(?P<id>\d+)/$', viewslong.terima, name='terima'),
     url(r'^adm/berita/$', views.adm_berita, name='adm_berita'),
-
 
 ]

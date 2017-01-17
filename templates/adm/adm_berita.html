@@ -1,7 +1,8 @@
 {% extends 'dash/dashbase.html' %} {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/pills.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/navBtn.css' %}" />
+
 {% endblock styles %}
 
 {% block head_extra %}
@@ -15,17 +16,17 @@
 </div>
 
 
-<div class="container">
-  <div class="col-md-1">
+<div class="container-fluid">
+  <div class="col-md-1 col-xs-0">
   </div>
-  <div class="col-md-10">
+  <div class="col-md-10 col-xs-12">
 
       <form method='POST' enctype="multipart/form-data" action=''>
         {% csrf_token %}
         {{formBerita|crispy}}
             <button type="submit" class="btn btn-success">Submit</Button>
       </form>
-      <div class="col-md-1">
+      <div class="col-md-1 col-xs-0">
       </div>
 </div>
 

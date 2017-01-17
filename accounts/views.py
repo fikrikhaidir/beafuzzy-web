@@ -19,7 +19,7 @@ def homepage(request):
             user = authenticate(username=username, password=password)
             login(request,user)
             return redirect('dashboard:home')
-    return render(request,"home.html",{"formLog":formLogin,"title":title})
+    return render(request,"landing/home.html",{"formLog":formLogin,"title":title})
 
 
 def register(request):
@@ -49,4 +49,4 @@ def Logout(request):
 
 def about(request):
     context ={}
-    return render(request,"about.html",(context))
+    return render(request,"landing/about.html",(context))

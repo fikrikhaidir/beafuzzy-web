@@ -13,7 +13,7 @@ html, body {
     height: 100% !important;
     margin: 0 !important;
     background-color: white;
-    /*overflow-y: hidden;*/
+    /*overflow: hidden;*/
 }
 
 .container-navbar-landing {
@@ -214,8 +214,8 @@ html, body {
     background-color: #fff;
     border: 1px solid transparent;
     border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    box-shadow: 0 8px 23px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+    /*-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);*/
+    box-shadow: 0 7px 27px rgba(12, 20, 22, 0.16), 0 5px 14px rgba(0, 0, 0, 0.23) !important;
 }
 .row-list-search{
   margin-top: 50px !important;
