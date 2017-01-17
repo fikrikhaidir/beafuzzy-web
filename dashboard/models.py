@@ -121,3 +121,27 @@ def pre_save_berita_receiver(sender,instance,*args,**kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
 pre_save.connect(pre_save_berita_receiver,sender=berita)
+
+class pesan_admin(models.Model):
+    subjek = models.CharField(default='', max_length=120,null=False)
+    penerima = models.IntegerField(null=False,default=0)
+    content = models.TextField(null=False)
+    dibaca = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+    def __unicode__(self):
+        return '%s' % self.penerima +' | '+ self.subjek
+    class Meta:
+        ordering = ["-timestamp"]
+
+class pesan_user(models.Model):
+    subjek = models.CharField(default='', max_length=120,null=False)
+    pengirim = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+    content = models.TextField(null=False)
+    dibaca = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+    def __unicode__(self):
+        return '%s' % self.pengirim +' | '+ self.subjek
+    class Meta:
+        ordering = ["-timestamp"]

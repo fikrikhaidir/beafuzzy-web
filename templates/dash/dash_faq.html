@@ -1,7 +1,9 @@
 {% extends 'dash/dashbase.html'  %}
 {% load staticfiles %}
 
-
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/navBtn.css' %}" />
+{% endblock styles %}
 
 {% block content %}
 
@@ -11,13 +13,24 @@
 
 <div class="container-fluid">
     <div class="row">
-    <div class="col-md-10 col-xs-10">
+
+      {% if user.is_superuser %}
+      <div class="container-fluid" id ="containerPills">
+          <div class="col-md-12">
+            <a class="btn btn-success btn-large" href="{% url 'dashboard:adm_berita' %}">
+        <i class="fa fa-plus fa-lg"></i> &nbsp;Tambah FAQ</a>
+          </div>
+      </div>
+      {% endif %}
+
+
+    <div class="col-md-12 col-xs-12">
 
       <div class="panel-group" id="faqAccordion">
           <div class="panel panel-default ">
               <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question0">
                    <h4 class="panel-title">
-                      <a href="#" class="ing">Q: What is Lorem Ipsum?</a>
+                      <a href="#" class="ing">Q: Bagaimana Cara Mengisi Data Untuk Melamar Beasiswa ?</a>
                 </h4>
 
               </div>

@@ -2,8 +2,9 @@ from django import forms
 from django.contrib.auth import ( authenticate, get_user_model,
                                   login,logout,)
 from django.contrib.auth.hashers import check_password
-from .models import data_member,data_admin,berita
+from .models import data_member,data_admin,berita,pesan_admin,pesan_user
 from pagedown.widgets import PagedownWidget
+from django.contrib.auth.models import User
 
 #----------------------------------------- form untuk register atau mendaftar beasiswa ---------------------------
 tahun_lahir_pilihan = [thn for thn in range(1945,2016)]
@@ -59,5 +60,27 @@ class form_berita(forms.ModelForm):
         fields = [
             'judul',
             'image',
+            'content',
+        ]
+
+class form_pesan_admin(forms.ModelForm):
+    subjek = forms.CharField(label='Subjek Pesan', error_messages={'required': 'Mohon diisi judul'})
+    penerima = forms.ModelChoiceField(queryset=User.objects.all(),label='Kepada : ', error_messages={'required': 'Pesan Harus Memiliki Tujuan'})
+    content = forms.CharField(label='Isi Pesan' ,widget=PagedownWidget())
+    class Meta:
+        model = pesan_admin
+        fields = [
+            'penerima',
+            'subjek',
+            'content',
+        ]
+
+class form_pesan_user(forms.ModelForm):
+    subjek = forms.CharField(label='Subjek Pesan', error_messages={'required': 'Mohon diisi judul'})
+    content = forms.CharField(label='Isi Pesan' ,widget=PagedownWidget())
+    class Meta:
+        model = pesan_user
+        fields = [
+            'subjek',
             'content',
         ]

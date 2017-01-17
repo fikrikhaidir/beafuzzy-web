@@ -1,0 +1,83 @@
+{% extends 'dash/dashbase.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block styles %}
+{% endblock styles %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Kotak Pesan <small>Baca,Tulis dan Kirim Pesan.</small></h1>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="box-body no-padding">
+                  <div class="mailbox-controls">
+                    <!-- Check all button -->
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#pesan-modal"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Tulis Pesan</button>
+                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="glyphicon glyphicon-unchecked"></i></button>
+                    <div class="btn-group">
+                      <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
+                      <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
+                      <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-share-alt"></i></button>
+                    </div><!-- /.btn-group -->
+                    <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
+                    <div class="pull-right">
+                      1-50/200
+                      <div class="btn-group">
+                        <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
+                        <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
+                      </div><!-- /.btn-group -->
+                    </div><!-- /.pull-right -->
+                  </div>
+                  <hr>
+                  <div class="table-responsive mailbox-messages">
+                    <table class="table table-hover table-striped">
+                      <tbody>
+                        <tr>
+                  {% for obj in listPesan %}
+                          <td><input type="checkbox"></td>
+                          <td class="mailbox-star"><a href=""><i class="fa fa-star text-yellow"></i></a></td>
+                          <td class="mailbox-name"><a href="read-mail.html">{{obj.pengirim}}</a></td>
+                          <td class="mailbox-subject">{{obj.subjek}}</td>
+                          <td class="mailbox-attachment"></td>
+                          <td class="mailbox-date"><b>{{obj.timestamp}}</b> id :  {{obj.id}}</td>
+                        </tr>
+                  {% endfor %}
+
+                      </tbody>
+                    </table><!-- /.table -->
+                  </div><!-- /.mail-box-messages -->
+      </div><!-- /.box-body -->
+
+                <div class="modal fade" id="pesan-modal" tabindex="-1" role="dialog" aria-labelledby="modalPesan" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                    <div class="loginmodal-container">
+                      <h1>Tulis Pesan</h1><br>
+                      <form method='POST' action=''>
+                        {% csrf_token %}
+                        {{formPesan|crispy}}
+                      <input type="submit" name="login" class="login loginmodal-submit" value="Kirim Pesan">
+                      </form>
+
+                      <div class="login-help">
+                      <a href="#">Register</a> - <a href="#">Forgot Password</a>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
+                <hr>
+                <div class="box-footer no-padding">
+                  <center><p> 2016 Beafuzzy by Muh Fikri Khaidir </p></center>
+                </div>
+              </div><!-- /. box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+	</div>
+</div>
+
+{% endblock content %}

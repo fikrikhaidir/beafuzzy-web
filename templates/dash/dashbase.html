@@ -86,7 +86,7 @@
                     </li>
 
                     <li>
-                        <div class="dropdown">
+                        <!-- <div class="dropdown">
                             <button class="btn btn-navbar dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 
                               <i class="fa fa-bell fa-bell-custom fa-fw" aria-hidden="true"></i>
@@ -99,7 +99,7 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </li>
                     <li>
                         <button class="btn btn-navbar dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="modal" data-target="#login-modal" aria-haspopup="true" aria-expanded="true">
@@ -159,10 +159,10 @@
                     <a class="list-group-item" href="{% url 'dashboard:berita' %}"><i class="fa fa-newspaper-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Berita </a>
                     <a class="list-group-item" href="{% url 'dashboard:timeline' %}"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Timeline</a>
                     <a class="list-group-item" href="{% url 'dashboard:listPendaftar' %}"><i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Validasi Data</a>
-                    <a class="list-group-item" href="{% url 'dashboard:pengumuman' %}"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pilih Kandidat</a>
+                    <a class="list-group-item" href="{% url 'dashboard:adm_pengumuman' %}"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pilih Kandidat</a>
                     <a class="list-group-item" href="{% url 'dashboard:adm_profile' %}"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Profil Saya</a>
-                    <a class="list-group-item" href=""><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pesan</a>
-                    <a class="list-group-item" href="{% url 'dashboard:pengaturan' %}"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pengaturan</a>
+                    <a class="list-group-item" href="{% url 'dashboard:pesan' %}"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pesan</a>
+                    <a class="list-group-item" href="{% url 'dashboard:pengaturan' %}"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Utilitas</a>
                     <a class="list-group-item" href="{% url 'dashboard:faq' %}"><i class="fa fa-question-circle-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; FAQ</a>
                 </div>
                 {% else %}
@@ -172,8 +172,8 @@
                     <a class="list-group-item" href="{% url 'dashboard:pengumuman' %}"><i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pengumuman</a>
                     <!-- <a class="list-group-item" href="#"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; Daftar Beasiswa</a> -->
                     <a class="list-group-item" href="{% url 'dashboard:profile' %}"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Profil Saya</a>
-                    <a class="list-group-item" href=""><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pesan</a>
-                    <a class="list-group-item" href="{% url 'dashboard:pengaturan' %}"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pengaturan</a>
+                    <a class="list-group-item" href="{% url 'dashboard:pesan' %}"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pesan</a>
+                    <a class="list-group-item" href="{% url 'dashboard:pengaturan' %}"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Utilitas</a>
                     <a class="list-group-item" href="{% url 'dashboard:faq' %}"><i class="fa fa-question-circle-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; FAQ</a>
                 </div>
                 {% endif %}
