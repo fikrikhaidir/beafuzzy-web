@@ -17,6 +17,7 @@ def adm_berita(request):
     akun = request.user
     if not akun.is_superuser and not akun.is_staff:
         return redirect('dashboard:berita')
+
     form = form_berita(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)

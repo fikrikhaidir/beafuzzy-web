@@ -41,7 +41,7 @@ def register(request):
         login(request,user)
         return redirect('dashboard:home')
 
-    return render(request,"register.html",{"title":title,"formLog":formLogin,"formReg":formRegister})
+    return render(request,"landing/register.html",{"title":title,"formLog":formLogin,"formReg":formRegister})
 
 def Logout(request):
     logout(request)

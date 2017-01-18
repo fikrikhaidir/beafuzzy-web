@@ -9,6 +9,7 @@ from django.utils import timezone
 from django import template
 import datetime
 from django.db import connection
+from django.db.models import Q
 from django.contrib.gis.geoip2 import GeoIP2
 
 
@@ -81,7 +82,10 @@ def listBerita(request):
         'fakultas':request.session['fakultas'],
         'instance':instance
     }
-
+    kunci = request.GET.get('kunci')
+    if kunci:
+        queryset_list=instance.filter(Q(judul__icontains=kunci)|Q(content__icontains=kunci)).distinct()
+        context['instance']=queryset_list
     return render(request,"dash/dash_berita.html",(context))
 
 @login_required

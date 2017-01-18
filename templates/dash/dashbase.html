@@ -14,12 +14,14 @@
 
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon/favicon.ico' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom/jquery-ui.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/fonts/font-awesome.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/dashboard.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/customDash.css' %}" />
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/cards.css' %}" /> -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/profile.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom/modal.css' %}" />
+
     {% block styles %} {% endblock styles %}
     {% block head_extra %} {% endblock head_extra %}
 
@@ -169,7 +171,7 @@
                 <div class="list-group">
                     <a class="list-group-item" href="{% url 'dashboard:berita' %}"><i class="fa fa-newspaper-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Berita </a>
                     <a class="list-group-item" href="{% url 'dashboard:timeline' %}"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Timeline</a>
-                    <a class="list-group-item" href="{% url 'dashboard:pengumuman' %}"><i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pengumuman</a>
+                    <a class="list-group-item" href="{% url 'dashboard:adm_pengumuman' %}"><i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pengumuman</a>
                     <!-- <a class="list-group-item" href="#"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; Daftar Beasiswa</a> -->
                     <a class="list-group-item" href="{% url 'dashboard:profile' %}"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Profil Saya</a>
                     <a class="list-group-item" href="{% url 'dashboard:pesan' %}"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp; Pesan</a>
@@ -199,14 +201,25 @@
 
     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
     <script src="{% static 'js/jquery/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery/jquery-ui.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
     <script>
         $("#menu-toggle").click(function(e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
     </script>
+    <script>
+     $(function() {
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1900:2017",
 
+    });
+  });
+    </script>
 </body>
 
 </html>

@@ -221,9 +221,11 @@ html, body {
   margin-top: 50px !important;
   z-index: 1000;
 }
-.btn{
+/*.btn{
 margin-bottom: 3px;
-}
+  border-radius: 0px;
+
+}*/
 
 .page-header>h1{
   font-family: 'RobotoLight';

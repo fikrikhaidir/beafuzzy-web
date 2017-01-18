@@ -9,9 +9,10 @@ from django.contrib.auth.models import User
 #----------------------------------------- form untuk register atau mendaftar beasiswa ---------------------------
 tahun_lahir_pilihan = [thn for thn in range(1945,2016)]
 class isi_data_member(forms.ModelForm):
-    TanggalLahir = forms.DateField(
-        widget=forms.SelectDateWidget(years=tahun_lahir_pilihan)
-    )
+    TanggalLahir = forms.DateField(label='Tanggal Lahir',widget=forms.TextInput(attrs=
+        {
+            'class': 'datepicker'
+        }))
     class Meta:
         model = data_member
         fields = [
