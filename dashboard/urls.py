@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^adm/profile/(?P<id>\d+)/$', viewslong.adm_profile_detail, name='adm_profile_detail'),
     url(r'^adm/profile/validasi/(?P<id>\d+)/$', viewslong.validasi_pendaftar, name='adm_validasi'),
     url(r'^adm/profile/terima/(?P<id>\d+)/$', viewslong.terima, name='terima'),
+    url(r'^adm/pesan/$', viewslong.adm_pesan, name='adm_pesan'),
     url(r'^adm/berita/$', viewslong.adm_berita, name='adm_berita'),
 
 ]

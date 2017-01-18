@@ -3,12 +3,15 @@ from django.http import HttpResponse, Http404,HttpRequest
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import isi_data_member,isi_data_admin,form_berita
-from .models import data_member,data_admin,hasil_kalkulasi,berita
+from .forms import isi_data_member,isi_data_admin,form_berita,form_pesan_admin,form_pesan_user
+from .models import data_member,data_admin,hasil_kalkulasi,berita,pesan_admin,pesan_user
 from django.utils import timezone
 from django import template
 import datetime
 from django.db import connection
+from django.db.models import Q
+from django.contrib.gis.geoip2 import GeoIP2
+
 from processors.fuzzify import fuzzifyIPK,fuzzifyORG,fuzzifyPOT,fuzzifyPRE,fuzzifyTAN
 from processors.rules import rulesMin
 
@@ -88,6 +91,26 @@ def adm_profile_detail(request,id=id):
         'fakultas':request.session['fakultas'],
     }
     return render(request, "adm/profile_detail.html",context)
+
+@login_required
+def adm_pesan(request):
+    akun  = request.user
+    if not akun.is_superuser and not akun.is_staff:
+        return redirect('dashboard:pesan')
+
+    listPesan = pesan_user.objects.all()
+    form=form_pesan_admin(request.POST or None)
+    context = {
+        'formPesan':form,
+        'listPesan':listPesan,
+    }
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.pengirim = request.user
+        instance.save()
+        return redirect('dashboard:adm_pesan')
+    return render(request,"dash/dash_pesan.html",(context))
+
 
 
 

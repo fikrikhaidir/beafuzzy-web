@@ -128,7 +128,11 @@ def profile(request):
 
 @login_required
 def pesan(request):
-    listPesan = pesan_user.objects.all()
+    akun  = request.user
+    if akun.is_superuser and akun.is_staff:
+        return redirect('dashboard:adm_pesan')
+
+    listPesan = pesan_admin.objects.all()
     form=form_pesan_user(request.POST or None)
     context = {
         'formPesan':form,
