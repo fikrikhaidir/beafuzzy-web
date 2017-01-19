@@ -1,4 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
+from reportlab.pdfgen import canvas
+
 from django.http import HttpResponse, Http404,HttpRequest
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -14,6 +16,9 @@ from django.contrib.gis.geoip2 import GeoIP2
 
 from processors.fuzzify import fuzzifyIPK,fuzzifyORG,fuzzifyPOT,fuzzifyPRE,fuzzifyTAN
 from processors.rules import rulesMin
+
+import reportlab
+
 
 @login_required
 def adm_berita(request):
@@ -178,3 +183,20 @@ def terima(request,id=id):
     else:
         raise Http404
     return redirect('dashboard:pengumuman')
+
+def cetakTest(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response)
+    nama = request.user.username
+    email = request.user.email
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Hello world. %s %s" % (nama,email))
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    return response

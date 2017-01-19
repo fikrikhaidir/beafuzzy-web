@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^adm/profile/terima/(?P<id>\d+)/$', viewslong.terima, name='terima'),
     url(r'^adm/pesan/$', viewslong.adm_pesan, name='adm_pesan'),
     url(r'^adm/berita/$', viewslong.adm_berita, name='adm_berita'),
+    url(r'^adm/cetak/$', viewslong.cetakTest, name='adm_cetak'),
 
 ]
