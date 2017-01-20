@@ -13,10 +13,13 @@ class isi_data_member(forms.ModelForm):
         {
             'class': 'datepicker'
         }))
+    avatar = forms.ImageField(label=' Avatar (Dimensi Optimal = Rasio 1:1 / 200 x 200 px)')
+
     class Meta:
         model = data_member
         fields = [
             "nama",
+            "avatar",
             "fakultas",
             "prodi",
             "nim",
@@ -35,6 +38,7 @@ class isi_data_member(forms.ModelForm):
         ]
 
 class isi_data_admin(forms.ModelForm):
+    image = forms.ImageField(label='Sematkan Gambar')
     TanggalLahir = forms.DateField(
         widget=forms.SelectDateWidget(years=tahun_lahir_pilihan)
     )
@@ -42,6 +46,7 @@ class isi_data_admin(forms.ModelForm):
         model = data_admin
         fields = [
             "nama",
+            "avatar",
             "jabatan",
             "fakultas",
             "prodi",

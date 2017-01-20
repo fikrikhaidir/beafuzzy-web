@@ -149,11 +149,14 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT,'media_cdn')
-print 'Media Root : '+MEDIA_ROOT
+# print 'Media Root : '+MEDIA_ROOT
+
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL='dashboard/'
+
 GEOIP_PATH = os.path.join(PROJECT_ROOT,'geoip')
-print 'GeoIP path : '+GEOIP_PATH
+# print 'GeoIP path : '+GEOIP_PATH
+
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 

@@ -11,6 +11,7 @@ from django.utils import timezone
 class data_member(models.Model):
     akun = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     nama = models.CharField(null=False, max_length=35, default='')
+    avatar = models.ImageField(upload_to='upload/avatar,',null=True,blank=True,verbose_name='avatar',default='' )
     fakultas = models.CharField(null=False, max_length=40, default='')
     prodi = models.CharField(null=False, max_length=40, default='')
     nim = models.CharField(null=False, max_length=10, default='', verbose_name='NIM')
@@ -52,6 +53,7 @@ class data_member(models.Model):
 
 class data_admin(models.Model):
     akun = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+    avatar = models.ImageField(upload_to='upload/avatar,',null=True,blank=True,verbose_name='avatar',default='')
     nama = models.CharField(null=False, max_length=35, default='')
     jabatan = models.CharField(null=False, max_length=40, default='')
     fakultas = models.CharField(null=False, max_length=40, default='')

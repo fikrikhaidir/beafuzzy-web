@@ -31,11 +31,14 @@ class UserRegisterForm(forms.ModelForm):
     email = forms.EmailField(label='Alamat Email')
     email2 = forms.EmailField(label='Konfirmasi Alamat Email')
     password = forms.CharField(widget=forms.PasswordInput)
-
+    first_name = forms.CharField(label='Nama Depan (max: 15 Karakter)', max_length='15')
+    last_name = forms.CharField(label='Nama Belakang (max: 20 Karakter)', max_length='20')
     class Meta:
         model= User
         fields = [
         'username',
+        'first_name',
+        'last_name',
         'email',
         'email2',
         'password',

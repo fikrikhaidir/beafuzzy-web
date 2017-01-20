@@ -5,20 +5,14 @@
     <h1>Berita & Pengumuman <small>Segala Pemberitaan Mengenai Beasiswa</small></h1>
 </div>
 
-{% if user.is_superuser %}
 <div class="container-fluid" id="containerPills">
     <div class="col-md-12">
         <div class="mailbox-controls">
-            <!-- Check all button -->
+            {% if user.is_superuser %}
             <a class="btn btn-success btn-sm" href="{% url 'dashboard:adm_berita' %}">
                 <i class="fa fa-plus fa-lg"></i> &nbsp;Tambah Berita</a>
-            <!-- <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#pesan-modal"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Tulis Pesan</button> -->
-
-            <div class="btn-group">
-                <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-share-alt"></i></button>
-            </div>
-            <!-- /.btn-group -->
-            <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
+                {% endif %}
+            
             <div class="pull-right">
 
                 <form class="form-inline" method="GET">
@@ -37,7 +31,7 @@
 </div>
 </div>
 
-{% endif %} {%for obj in instance%}
+{%for obj in instance%}
 
 
 <div class="col-md-12">

@@ -19,8 +19,8 @@ def dashboard_home(request):
     # kotaa = request.META.get('HTTP_X_FORWARDED_FOR')
     # kota = GeoIP2().city(kotaa)
 
-    print request.META.get('REMOTE_ADDR')
-    print request.META.get('REMOTE_HOST')
+    # print request.META.get('REMOTE_ADDR')
+    # print request.META.get('REMOTE_HOST')
     kota,provinsi,negara = kota['city'],kota['region'],kota['country_name']
     waktu = datetime.datetime.now()
     tahun,bulan,tanggal = waktu.year,waktu.month,waktu.day
@@ -49,22 +49,31 @@ def dashboard_home(request):
         data = data_admin.objects.filter(akun=akun)
         if data:
             user = data_admin.objects.get(akun=akun)
-            request.session['nama']=user.nama
+            namaLengkap = akun.first_name+' '+akun.last_name
+            request.session['nama']=namaLengkap
             request.session['fakultas']=user.fakultas
             context['fakultas']=request.session['fakultas']
+            request.session['ava_url']=user.avatar.url
+
         else:
-            request.session['nama']=akun.username
+            namaLengkap = akun.first_name+' '+akun.last_name
+            request.session['nama']=namaLengkap
             request.session['fakultas']=''
 
     else:
         data = data_member.objects.filter(akun=akun)
         if data:
             user = data_member.objects.get(akun=akun)
-            request.session['nama']=user.nama
+            namaLengkap = akun.first_name+' '+akun.last_name
+            request.session['nama']=namaLengkap
             request.session['fakultas']=user.fakultas
+            request.session['ava_url']=user.avatar.url
             context['fakultas']=request.session['fakultas']
+            context['ava_url']=request.session['ava_url']
+
         else:
-            request.session['nama']=akun.username
+            namaLengkap = akun.first_name+' '+akun.last_name
+            request.session['nama']=namaLengkap
             request.session['fakultas']=''
 
 
