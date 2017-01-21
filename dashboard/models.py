@@ -147,3 +147,19 @@ class pesan_user(models.Model):
         return '%s' % self.pengirim +' | '+ self.subjek
     class Meta:
         ordering = ["-timestamp"]
+
+class timeline(models.Model):
+    j_pendaftaran = models.CharField(default='', max_length=120,null=False)
+    j_review = models.CharField(default='', max_length=120,null=False)
+    j_seleksi = models.CharField(default='', max_length=120,null=False)
+    j_pengumuman = models.CharField(default='', max_length=120,null=False)
+    j_penerimaan = models.CharField(default='', max_length=120,null=False)
+    c_pendaftaran = models.TextField(null=False,max_length=320,default='')
+    c_review = models.TextField(null=False,max_length=320,default='')
+    c_seleksi = models.TextField(null=False,max_length=320,default='')
+    c_pengumuman = models.TextField(null=False,max_length=320,default='')
+    c_penerimaan = models.TextField(null=False,max_length=320,default='')
+    tahun_penerimaan = models.CharField(null=False,blank=False, max_length=4,default=0)
+
+    def __unicode__(self):
+        return 'Tanggal Penting & Event'
