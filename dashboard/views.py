@@ -87,22 +87,25 @@ def listBerita(request):
     else:
         instance = None
     context={
-        'username':request.session['nama'],
-        'fakultas':request.session['fakultas'],
         'instance':instance
     }
     kunci = request.GET.get('kunci')
     if kunci:
         queryset_list=instance.filter(Q(judul__icontains=kunci)|Q(content__icontains=kunci)).distinct()
         context['instance']=queryset_list
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"dash/dash_berita.html",(context))
 
 @login_required
 def timeline(request):
     context={
-        'username':request.session['nama'],
-        'fakultas':request.session['fakultas'],
+
     }
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"dash/dash_timeline.html",(context))
 
 @login_required
@@ -133,6 +136,7 @@ def profile(request):
         }
     context['username']=request.session['nama']
     context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"dash/dash_profile.html",(context))
 
 @login_required
@@ -152,20 +156,26 @@ def pesan(request):
         instance.pengirim = request.user
         instance.save()
         return redirect('dashboard:pesan')
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"dash/dash_pesan.html",(context))
 
 @login_required
 def faq(request):
     context={
-        'username':request.session['nama'],
-        'fakultas':request.session['fakultas'],
-    }
 
+    }
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"dash/dash_faq.html",(context))
 @login_required
 def pengaturan(request):
     context={
-        'username':request.session['nama'],
-        'fakultas':request.session['fakultas'],
+
     }
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"dash/dash_pengaturan.html",(context))

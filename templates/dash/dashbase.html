@@ -11,7 +11,6 @@
 
 
     <title>Dashboard</title>
-
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon/favicon.ico' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom/jquery-ui.min.css' %}" />
@@ -136,7 +135,11 @@
                 <div class="profile-sidebar">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
+                        {% if ava_url %}
                         <img src="{{ava_url}}" class="img-responsive" alt="">
+                        {% else %}
+                        <img src="{% static 'img/avatar.jpg' %}" class="img-responsive" alt="">
+                        {% endif %}
                     </div>
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
