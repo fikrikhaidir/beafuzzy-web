@@ -3,8 +3,8 @@ from django.http import HttpResponse, Http404,HttpRequest
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import isi_data_member,isi_data_admin,form_berita,form_pesan_admin,form_pesan_user
-from .models import data_member,data_admin,hasil_kalkulasi,berita,pesan_admin,pesan_user
+from .forms import isi_data_member,isi_data_admin,form_berita,form_pesan_admin,form_pesan_user,form_timeline_penerimaan,form_timeline_pengumuman,form_timeline_seleksi,form_timeline_review,form_timeline_pendaftaran
+from .models import data_member,data_admin,hasil_kalkulasi,berita,pesan_admin,pesan_user,timeline
 from django.utils import timezone
 from django import template
 import datetime
@@ -52,14 +52,13 @@ def dashboard_home(request):
             namaLengkap = akun.first_name+' '+akun.last_name
             request.session['nama']=namaLengkap
             request.session['fakultas']=user.fakultas
-            context['fakultas']=request.session['fakultas']
             request.session['ava_url']=user.avatar.url
-
+            context['fakultas']=request.session['fakultas']
+            context['ava_url']=request.session['ava_url']
         else:
             namaLengkap = akun.first_name+' '+akun.last_name
             request.session['nama']=namaLengkap
             request.session['fakultas']=''
-
     else:
         data = data_member.objects.filter(akun=akun)
         if data:
@@ -70,13 +69,10 @@ def dashboard_home(request):
             request.session['ava_url']=user.avatar.url
             context['fakultas']=request.session['fakultas']
             context['ava_url']=request.session['ava_url']
-
         else:
             namaLengkap = akun.first_name+' '+akun.last_name
             request.session['nama']=namaLengkap
             request.session['fakultas']=''
-
-
     context['username']=request.session['nama']
     return render(request,"dash/dash_home.html",(context))
 
@@ -99,9 +95,10 @@ def listBerita(request):
     return render(request,"dash/dash_berita.html",(context))
 
 @login_required
-def timeline(request):
+def view_timeline(request):
+    instance=get_object_or_404(timeline,id=1)
     context={
-
+        'obj':instance,
     }
     context['username']=request.session['nama']
     context['fakultas']=request.session['fakultas']

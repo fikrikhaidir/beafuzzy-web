@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import ( authenticate, get_user_model,
                                   login,logout,)
 from django.contrib.auth.hashers import check_password
-from .models import data_member,data_admin,berita,pesan_admin,pesan_user
+from .models import data_member,data_admin,berita,pesan_admin,pesan_user,timeline
 from pagedown.widgets import PagedownWidget
 from django.contrib.auth.models import User
 
@@ -89,4 +89,44 @@ class form_pesan_user(forms.ModelForm):
         fields = [
             'subjek',
             'content',
+        ]
+
+class form_timeline_pendaftaran(forms.ModelForm):
+    class Meta:
+        model = timeline
+        fields = [
+            'j_pendaftaran',
+            'c_pendaftaran',
+        ]
+
+class form_timeline_review(forms.ModelForm):
+    class Meta:
+        model = timeline
+        fields = [
+            'j_review',
+            'c_review',
+        ]
+
+class form_timeline_seleksi(forms.ModelForm):
+    class Meta:
+        model = timeline
+        fields = [
+            'j_seleksi',
+            'c_seleksi',
+        ]
+
+class form_timeline_pengumuman(forms.ModelForm):
+    class Meta:
+        model = timeline
+        fields = [
+            'j_pengumuman',
+            'c_pengumuman',
+        ]
+
+class form_timeline_penerimaan(forms.ModelForm):
+    class Meta:
+        model = timeline
+        fields = [
+            'j_penerimaan',
+            'c_penerimaan',
         ]

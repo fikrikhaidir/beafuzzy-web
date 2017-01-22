@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.utils import timezone
-
+import datetime
 
 class data_member(models.Model):
     akun = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
@@ -159,7 +159,13 @@ class timeline(models.Model):
     c_seleksi = models.TextField(null=False,max_length=320,default='')
     c_pengumuman = models.TextField(null=False,max_length=320,default='')
     c_penerimaan = models.TextField(null=False,max_length=320,default='')
+    t_pendaftaran = models.TextField(null=False,max_length=45,default='')
+    t_review = models.TextField(null=False,max_length=45,default='')
+    t_seleksi = models.TextField(null=False,max_length=45,default='')
+    t_pengumuman = models.TextField(null=False,max_length=45,default='')
+    t_penerimaan = models.TextField(null=False,max_length=45,default='')
     tahun_penerimaan = models.CharField(null=False,blank=False, max_length=4,default=0)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False,null=True)
 
     def __unicode__(self):
         return 'Tanggal Penting & Event'

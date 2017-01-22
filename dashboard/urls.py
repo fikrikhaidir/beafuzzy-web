@@ -5,7 +5,7 @@ from . import views,viewslong
 urlpatterns = [
     url(r'^$', views.dashboard_home, name='home'),
     url(r'^berita/$', views.listBerita, name='berita'),
-    url(r'^timeline/$', views.timeline, name='timeline'),
+    url(r'^timeline/$', views.view_timeline, name='timeline'),
     url(r'^profil/$', views.profile, name='profile'),
     url(r'^pesan/$', views.pesan, name='pesan'),
     url(r'^pengaturan/$', views.pengaturan, name='pengaturan'),
