@@ -47,6 +47,7 @@ def pengumuman(request):
     context={
         'username':request.session['nama'],
         'fakultas':request.session['fakultas'],
+        'ava_url':request.session['ava_url'],
         'instance':instance,
     }
 
@@ -81,6 +82,7 @@ def adm_profile(request):
 
     context['username']=request.session['nama']
     context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"adm/adm_profile.html",(context))
 
 @login_required
@@ -95,6 +97,9 @@ def adm_profile_detail(request,id=id):
         'username':request.session['nama'],
         'fakultas':request.session['fakultas'],
     }
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request, "adm/profile_detail.html",context)
 
 @login_required
@@ -114,6 +119,9 @@ def adm_pesan(request):
         instance.pengirim = request.user
         instance.save()
         return redirect('dashboard:adm_pesan')
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"dash/dash_pesan.html",(context))
 
 
@@ -128,6 +136,9 @@ def adm_listPendaftar(request):
         'username':request.session['nama'],
         'fakultas':request.session['fakultas'],
     }
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"adm/adm_listPendaftar.html",(context))
 
 

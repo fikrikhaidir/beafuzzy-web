@@ -126,7 +126,7 @@ pre_save.connect(pre_save_berita_receiver,sender=berita)
 
 class pesan_admin(models.Model):
     subjek = models.CharField(default='', max_length=120,null=False)
-    penerima = models.IntegerField(null=False,default=0)
+    penerima = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=False)
     content = models.TextField(null=False)
     dibaca = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -177,6 +177,6 @@ class faq(models.Model):
     updated = models.DateTimeField(auto_now=True, auto_now_add=False,null=True)
 
     def __unicode__(self):
-        return '%s' % self.pertanyaan 
+        return '%s' % self.pertanyaan
     class Meta:
         ordering = ["-timestamp"]
