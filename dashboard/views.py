@@ -97,9 +97,40 @@ def listBerita(request):
 @login_required
 def view_timeline(request):
     instance=get_object_or_404(timeline,id=1)
+    f1=form_timeline_pendaftaran(request.POST or None,instance=instance)
+    f2=form_timeline_review(request.POST or None,instance=instance)
+    f3=form_timeline_seleksi(request.POST or None,instance=instance)
+    f4=form_timeline_pengumuman(request.POST or None,instance=instance)
+    f5=form_timeline_penerimaan(request.POST or None,instance=instance)
     context={
         'obj':instance,
+        'formPendaftaran':f1,
+        'formReview':f2,
+        'formSeleksi':f3,
+        'formPengumuman':f4,
+        'formPenerimaan':f5,
     }
+    if f1.is_valid():
+        instance = f1.save(commit=False)
+        instance.save()
+        return redirect('dashboard:timeline')
+    elif f2.is_valid():
+        instance = f2.save(commit=False)
+        instance.save()
+        return redirect('dashboard:timeline')
+    elif f3.is_valid():
+        instance = f3.save(commit=False)
+        instance.save()
+        return redirect('dashboard:timeline')
+    elif f4.is_valid():
+        instance = f4.save(commit=False)
+        instance.save()
+        return redirect('dashboard:timeline')
+    elif f5.is_valid():
+        instance = f5.save(commit=False)
+        instance.save()
+        return redirect('dashboard:timeline')
+
     context['username']=request.session['nama']
     context['fakultas']=request.session['fakultas']
     context['ava_url']=request.session['ava_url']

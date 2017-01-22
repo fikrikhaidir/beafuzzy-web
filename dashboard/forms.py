@@ -96,6 +96,7 @@ class form_timeline_pendaftaran(forms.ModelForm):
         model = timeline
         fields = [
             'j_pendaftaran',
+            't_pendaftaran',
             'c_pendaftaran',
         ]
 
@@ -104,6 +105,7 @@ class form_timeline_review(forms.ModelForm):
         model = timeline
         fields = [
             'j_review',
+            't_review',
             'c_review',
         ]
 
@@ -112,6 +114,7 @@ class form_timeline_seleksi(forms.ModelForm):
         model = timeline
         fields = [
             'j_seleksi',
+            't_seleksi',
             'c_seleksi',
         ]
 
@@ -120,6 +123,7 @@ class form_timeline_pengumuman(forms.ModelForm):
         model = timeline
         fields = [
             'j_pengumuman',
+            't_pengumuman',
             'c_pengumuman',
         ]
 
@@ -128,5 +132,6 @@ class form_timeline_penerimaan(forms.ModelForm):
         model = timeline
         fields = [
             'j_penerimaan',
+            't_penerimaan',
             'c_penerimaan',
         ]

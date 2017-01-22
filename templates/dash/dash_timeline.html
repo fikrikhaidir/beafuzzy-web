@@ -1,5 +1,6 @@
 {% extends 'dash/dashbase.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/timeline.css' %}" />
@@ -23,6 +24,9 @@
             </div>
             <div class="timeline-body">
               <p>&nbsp;&nbsp;&nbsp;&nbsp;{{obj.c_pendaftaran}}</p>
+              {% if user.is_superuser %}
+              <br /><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalPendaftaran"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Ubah</button>
+              {% endif %}
             </div>
           </div>
         </li>
@@ -36,6 +40,9 @@
             </div>
             <div class="timeline-body">
               <p>{{obj.c_review}}</p>
+              {% if user.is_superuser %}
+              <br /><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalReview"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Ubah</button>
+              {% endif %}
             </div>
           </div>
         </li>
@@ -49,6 +56,9 @@
             </div>
             <div class="timeline-body">
               <p>{{obj.c_seleksi}}.</p>
+              {% if user.is_superuser %}
+              <br /><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalSeleksi"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Ubah</button>
+              {% endif %}
             </div>
           </div>
         </li>
@@ -63,6 +73,9 @@
             </div>
             <div class="timeline-body">
               <p>{{obj.c_pengumuman}}</p>
+              {% if user.is_superuser %}
+              <br /><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalPengumuman"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Ubah</button>
+              {% endif %}
               <hr>
                 <a type="button" href="{% url 'dashboard:adm_pengumuman' %}" class="btn btn-primary btn-sm btn-info"><i class="glyphicon glyphicon-eye-open"> </i>&nbsp; Lihat Pengumuman</a>
 
@@ -79,11 +92,82 @@
             </div>
             <div class="timeline-body">
               <p>{{obj.c_penerimaan}}</p>
+              {% if user.is_superuser %}
+              <br /><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalPenerimaan"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Ubah</button>
+              {% endif %}
             </div>
           </div>
         </li>
     </ul>
 </div>
+{% if user.is_superuser %}
 
+<div class="modal fade" id="modalPendaftaran" tabindex="-1" role="dialog" aria-labelledby="modalPendaftaran" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>Ubah Data</h1><br>
+      <form method='POST' action=''>
+        {% csrf_token %}
+        {{formPendaftaran|crispy}}
+      <input type="submit" name="login" class="login loginmodal-submit" value="Simpan">
+      </form>
+    </div>
+  </div>
+  </div>
 
+  <div class="modal fade" id="modalReview" tabindex="-1" role="dialog" aria-labelledby="modalReview" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+      <div class="loginmodal-container">
+        <h1>Ubah Data</h1><br>
+        <form method='POST' action=''>
+          {% csrf_token %}
+          {{formReview|crispy}}
+        <input type="submit" name="login" class="login loginmodal-submit" value="Simpan">
+        </form>
+
+      </div>
+    </div>
+    </div>
+
+  <div class="modal fade" id="modalSeleksi" tabindex="-1" role="dialog" aria-labelledby="modalSeleksi" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+      <div class="loginmodal-container">
+        <h1>Ubah Data</h1><br>
+        <form method='POST' action=''>
+          {% csrf_token %}
+          {{formSeleksi|crispy}}
+        <input type="submit" name="login" class="login loginmodal-submit" value="Simpan">
+        </form>
+
+      </div>
+    </div>
+    </div>
+
+  <div class="modal fade" id="modalPengumuman" tabindex="-1" role="dialog" aria-labelledby="modalPengumuman" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+      <div class="loginmodal-container">
+        <h1>Ubah Data</h1><br>
+        <form method='POST' action=''>
+          {% csrf_token %}
+          {{formPengumuman|crispy}}
+        <input type="submit" name="login" class="login loginmodal-submit" value="Simpan">
+        </form>
+
+      </div>
+    </div>
+    </div>
+  <div class="modal fade" id="modalPenerimaan" tabindex="-1" role="dialog" aria-labelledby="modalPenerimaan" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+      <div class="loginmodal-container">
+        <h1>Ubah Data</h1><br>
+        <form method='POST' action=''>
+          {% csrf_token %}
+          {{formPenerimaan|crispy}}
+        <input type="submit" name="login" class="login loginmodal-submit" value="Simpan">
+        </form>
+
+      </div>
+    </div>
+    </div>
+{% endif %}
 {% endblock %}
