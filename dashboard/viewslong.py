@@ -5,8 +5,8 @@ from django.http import HttpResponse, Http404,HttpRequest
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import isi_data_member,isi_data_admin,form_berita,form_pesan_admin,form_pesan_user
-from .models import data_member,data_admin,hasil_kalkulasi,berita,pesan_admin,pesan_user
+from .forms import isi_data_member,isi_data_admin,form_berita,form_pesan_admin,form_pesan_user,form_timeline_penerimaan,form_timeline_pengumuman,form_timeline_seleksi,form_timeline_review,form_timeline_pendaftaran,form_faq
+from .models import data_member,data_admin,hasil_kalkulasi,berita,pesan_admin,pesan_user,timeline,faq
 from django.utils import timezone
 from django import template
 import datetime
@@ -108,21 +108,26 @@ def adm_pesan(request):
     if not akun.is_superuser and not akun.is_staff:
         return redirect('dashboard:pesan')
 
-    listPesan = pesan_user.objects.all()
+    instance = pesan_user.objects.all()
     form=form_pesan_admin(request.POST or None)
     context = {
         'formPesan':form,
-        'listPesan':listPesan,
+        'instance':instance,
     }
     if form.is_valid():
         instance = form.save(commit=False)
         instance.pengirim = request.user
         instance.save()
         return redirect('dashboard:adm_pesan')
+    kunci = request.GET.get('kunci')
+    if kunci:
+        # akunPengirim=User.objects.get(akun=kunci)
+        queryset_list=instance.filter(Q(content__icontains=kunci)|Q(subjek__icontains=kunci)).distinct()
+        context['instance']=queryset_list
     context['username']=request.session['nama']
     context['fakultas']=request.session['fakultas']
     context['ava_url']=request.session['ava_url']
-    return render(request,"dash/dash_pesan.html",(context))
+    return render(request,"adm/adm_pesan.html",(context))
 
 
 
@@ -211,3 +216,38 @@ def cetakTest(request):
     p.showPage()
     p.save()
     return response
+
+def del_berita(request,id=id):
+    if not request.user.is_superuser:
+        return redirect('dashboard:berita')
+    instance = berita.objects.get(id=id)
+    instance.delete()
+    return redirect('dashboard:berita')
+
+def edit_berita(request,id=id):
+    if not request.user.is_superuser:
+        return redirect('dashboard:berita')
+    instance = berita.objects.get(id=id)
+    form = form_berita(request.POST or None)
+    return redirect('dashboard:berita')
+
+def del_faq(request,id=id):
+    if not request.user.is_superuser:
+        return redirect('dashboard:faq')
+    instance = faq.objects.get(id=id)
+    instance.delete()
+    return redirect('dashboard:faq')
+
+def edit_faq(request,id=id):
+    if not request.user.is_superuser:
+        return redirect('dashboard:faq')
+    instance = faq.objects.get(id=id)
+    form = form_faq(request.POST or None,instance=instance)
+    context = {
+        'form':form,
+    }
+    if form.is_valid():
+        i = form.save(commit=False)
+        i.save()
+        return redirect('dashboard:faq')
+    return render(request,'adm/edit_faq.html',(context))

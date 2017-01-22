@@ -1,0 +1,41 @@
+{% extends 'dash/dashbase.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block styles %}
+{% endblock styles %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Baca Pesan <small>Baca,Tulis dan Kirim Pesan.</small></h1>
+</div>
+
+
+
+<div class="col-md-12">
+    <div class="container-fluid">
+
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <h2><a href="">{{instance.subjek}}</a></h2>
+                <div class="divider"></div>
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{instance.content}}
+                </p>
+            </div>
+            <div class="container-fluid">
+                <div class="container-fluid panel-footer"> {{instance.timestamp}}
+                    <div class="pull-right">
+                        <!-- <span id='btn-berit' <button class="btn btn-info" type="button">Baca</button></span> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

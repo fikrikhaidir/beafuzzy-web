@@ -1,29 +1,28 @@
-{% extends 'dash/dashbase.html' %} {% load staticfiles %}
+{% extends 'dash/dashbase.html' %}
+{% load staticfiles %}
 {% load crispy_forms_tags %}
-{% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/navBtn.css' %}" />
-{% endblock styles %}
 
-{% block head_extra %}
-{{formBerita.media}}
-{% endblock head_extra %}
+{% block styles %}
+{% endblock styles %}
 
 {% block content %}
 
 <div class="page-header">
-    <h1>Buat Berita <small>Buat, Ubah dan Hapus Berita.</small></h1>
+    <h1>Edit Data <small>Perbaiki data yang telah disubmit</small></h1>
 </div>
+
 
 
 <div class="container-fluid">
   <div class="col-md-1 col-xs-0">
   </div>
   <div class="col-md-10 col-xs-12">
-
+      <!-- <h3>Pastikan setiap F.A.Q. memiliki maksud dan instruksi yang jelas dan efisien.</h3> -->
+      <br /><br />
       <form method='POST' enctype="multipart/form-data" action=''>
         {% csrf_token %}
-        {{formBerita|crispy}}
-            <button type="submit" class="btn btn-success">Submit</Button>
+        {{form|crispy}}
+            <button type="submit" class="btn btn-success">Simpan</Button>
       </form>
       <div class="col-md-1 col-xs-0">
       </div>

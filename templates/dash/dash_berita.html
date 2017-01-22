@@ -39,7 +39,7 @@
 
         <div class="panel panel-info">
             <div class="panel-body">
-                <h2>{{obj.judul|truncatechars:50}}</h2>
+                <h2><a href="{% url 'dashboard:detail_berita' id=obj.id %}">{{obj.judul|truncatechars:50}}</a></h2>
                 <div class="divider"></div>
                 <p>
                     &nbsp;&nbsp;&nbsp;&nbsp;{{obj.content|truncatechars:250}}

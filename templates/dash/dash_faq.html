@@ -46,10 +46,13 @@
                    <h4 class="panel-title">
                       <a href="#" class="ing">Q&nbsp;: {{obj.pertanyaan}}</a>
                 </h4>
-
               </div>
               <div id="{{obj.id}}" class="panel-collapse collapse" style="height: 0px;">
                   <div class="panel-body">
+                    {% if user.is_superuser %}
+                    <a class="btn btn-danger btn-sm pull-right" href="{% url 'dashboard:del_faq' id=obj.id %}"> Hapus </a> &nbsp; &nbsp;
+                    <a class="btn btn-warning btn-sm pull-right" href="{% url 'dashboard:edit_faq' id=obj.id %}"> Ubah </a>
+                    {% endif %}
                        <h5><span class="label label-primary">Answer</span></h5>
 
                       <p>{{obj.jawaban}}</p>

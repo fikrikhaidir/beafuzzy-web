@@ -1,0 +1,42 @@
+{% extends 'dash/dashbase.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/navBtn.css' %}" /> {% endblock styles %} {% block content %}
+
+<div class="page-header">
+    <h1>Baca Berita <small>Segala Pemberitaan Mengenai Beasiswa</small></h1>
+</div>
+
+<div class="col-md-12">
+    <div class="container-fluid">
+
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <h2>{{obj.judul}}</h2>
+                <div class="divider"></div>
+                <div class="col-md-5">
+                <img class="img-responsive" src="{{obj.image.url}}" />
+                </div>
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{obj.content}}
+                </p>
+
+            </div>
+            <div class="container-fluid">
+                <div class="container-fluid panel-footer"> {{obj.timestamp}}
+                    <div class="pull-right">
+                      {% if user.is_superuser %}
+                      <a class="btn btn-danger btn-sm pull-right" href="{% url 'dashboard:del_faq' id=obj.id %}"> Hapus </a> &nbsp; &nbsp;
+                      <a class="btn btn-warning btn-sm pull-right" href="{% url 'dashboard:edit_faq' id=obj.id %}"> Ubah </a>
+                      {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -13,6 +13,7 @@ class data_member(models.Model):
     nama = models.CharField(null=False, max_length=35, default='')
     avatar = models.ImageField(upload_to='upload/avatar,',null=True,blank=True,verbose_name='avatar',default='' )
     fakultas = models.CharField(null=False, max_length=40, default='')
+    telepon = models.CharField(null=True,max_length=18,default='')
     prodi = models.CharField(null=False, max_length=40, default='')
     nim = models.CharField(null=False, max_length=10, default='', verbose_name='NIM')
     ktm = models.ImageField(upload_to='upload/ktm', default='', verbose_name='KTM')
@@ -22,7 +23,9 @@ class data_member(models.Model):
     ipk = models.FloatField(null=False, max_length=5, default='',verbose_name='IPK')
     transkrip = models.ImageField(upload_to='upload/transkrip', default='', verbose_name='Transkrip Nilai')
     tan = models.FloatField(null=False, default='', verbose_name='Tanggungan Orang Tua')
+    bukti_tan = models.ImageField(upload_to='upload/bukti_tan', default='',verbose_name='Bukti Tanggungan Orang Tua. ex : Kartu Keluarga')
     pot = models.FloatField(null=False, default='', verbose_name='Pendapatan Orang Tua/Bulan (Rp)')
+    bukti_pot =models.ImageField(upload_to='upload/bukti_pot',default='',verbose_name='Bukti Pendapatan Orang Tua. Ex : Slip Gaji')
     pre_choices_pre = (
         (0.55, '---Tidak Ada---'),
         (1.75 , 'Regional'),
@@ -172,7 +175,7 @@ class timeline(models.Model):
 
 class faq(models.Model):
     pertanyaan = models.CharField(default='', max_length=105,null=False)
-    jawaban = models.TextField(null=False, max_length=550, default='')
+    jawaban = models.TextField(null=False, max_length=1500, default='')
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True,null=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False,null=True)
 
