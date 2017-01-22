@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import ( authenticate, get_user_model,
                                   login,logout,)
 from django.contrib.auth.hashers import check_password
-from .models import data_member,data_admin,berita,pesan_admin,pesan_user,timeline
+from .models import data_member,data_admin,berita,pesan_admin,pesan_user,timeline,faq
 from pagedown.widgets import PagedownWidget
 from django.contrib.auth.models import User
 
@@ -134,4 +134,12 @@ class form_timeline_penerimaan(forms.ModelForm):
             'j_penerimaan',
             't_penerimaan',
             'c_penerimaan',
+        ]
+
+class form_faq(forms.ModelForm):
+    class Meta:
+        model = faq
+        fields= [
+            'pertanyaan',
+            'jawaban',
         ]

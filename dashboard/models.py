@@ -169,3 +169,14 @@ class timeline(models.Model):
 
     def __unicode__(self):
         return 'Tanggal Penting & Event'
+
+class faq(models.Model):
+    pertanyaan = models.CharField(default='', max_length=105,null=False)
+    jawaban = models.TextField(null=False, max_length=550, default='')
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True,null=True)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False,null=True)
+
+    def __unicode__(self):
+        return '%s' % self.pertanyaan 
+    class Meta:
+        ordering = ["-timestamp"]

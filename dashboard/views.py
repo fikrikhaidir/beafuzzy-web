@@ -3,8 +3,8 @@ from django.http import HttpResponse, Http404,HttpRequest
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import isi_data_member,isi_data_admin,form_berita,form_pesan_admin,form_pesan_user,form_timeline_penerimaan,form_timeline_pengumuman,form_timeline_seleksi,form_timeline_review,form_timeline_pendaftaran
-from .models import data_member,data_admin,hasil_kalkulasi,berita,pesan_admin,pesan_user,timeline
+from .forms import isi_data_member,isi_data_admin,form_berita,form_pesan_admin,form_pesan_user,form_timeline_penerimaan,form_timeline_pengumuman,form_timeline_seleksi,form_timeline_review,form_timeline_pendaftaran,form_faq
+from .models import data_member,data_admin,hasil_kalkulasi,berita,pesan_admin,pesan_user,timeline,faq
 from django.utils import timezone
 from django import template
 import datetime
@@ -190,14 +190,26 @@ def pesan(request):
     return render(request,"dash/dash_pesan.html",(context))
 
 @login_required
-def faq(request):
+def view_faq(request):
+    instance = faq.objects.all()
+    form = form_faq(request.POST or None)
     context={
-
+        'instance':instance,
+        'formFaq':form,
     }
+    if form.is_valid():
+        i = form.save(commit=False)
+        i.save()
+        return redirect('dashboard:faq')
+    kunci = request.GET.get('kunci')
+    if kunci:
+        queryset_list=instance.filter(Q(pertanyaan__icontains=kunci)|Q(jawaban__icontains=kunci)).distinct()
+        context['instance']=queryset_list
     context['username']=request.session['nama']
     context['fakultas']=request.session['fakultas']
     context['ava_url']=request.session['ava_url']
     return render(request,"dash/dash_faq.html",(context))
+
 @login_required
 def pengaturan(request):
     context={

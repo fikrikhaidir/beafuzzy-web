@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^profil/$', views.profile, name='profile'),
     url(r'^pesan/$', views.pesan, name='pesan'),
     url(r'^pengaturan/$', views.pengaturan, name='pengaturan'),
-    url(r'^faq/$', views.faq, name='faq'),
+    url(r'^faq/$', views.view_faq, name='faq'),
 
 
     url(r'^adm/pengumuman/$', viewslong.pengumuman, name='adm_pengumuman'),
