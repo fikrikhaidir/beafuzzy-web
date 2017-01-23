@@ -27,5 +27,8 @@ urlpatterns = [
     url(r'^adm/berita/$', viewslong.adm_berita, name='adm_berita'),
     url(r'^adm/cetak/$', viewslong.cetakTest, name='adm_cetak'),
     url(r'^adm/edit_faq/(?P<id>\d+)/$', viewslong.edit_faq, name='edit_faq'),
+    url(r'^adm/cetak/pendaftar/$', viewslong.cetak_rekap_pendaftar, name='adm_cetak_pendaftar'),
+    url(r'^adm/cetak/diterima/$', viewslong.cetak_rekap_diterima, name='adm_cetak_diterima'),
+    url(r'^adm/cetak/ditolak/$', viewslong.cetak_rekapan_ditolak, name='adm_cetak_ditolak'),
 
 ]

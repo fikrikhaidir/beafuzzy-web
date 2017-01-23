@@ -18,6 +18,11 @@ from processors.fuzzify import fuzzifyIPK,fuzzifyORG,fuzzifyPOT,fuzzifyPRE,fuzzi
 from processors.rules import rulesMin
 
 import reportlab
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import A4, landscape
+from reportlab.lib import colors
 
 
 @login_required
@@ -251,3 +256,180 @@ def edit_faq(request,id=id):
         i.save()
         return redirect('dashboard:faq')
     return render(request,'adm/edit_faq.html',(context))
+
+def cetak_rekap_pendaftar(request):
+    # pengaturan respon berformat pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="rekapan_pendaftar.pdf"'
+
+    # mengambil daftar kehadiran dan mengubahnya menjadi data ntuk tabel
+    data = data_member.objects.all()
+    table_data = []
+    table_data.append([ "Nama","NIM","Fakultas","Prodi" ])
+    for x in data:
+        table_data.append([ x.nama, x.nim, x.fakultas, x.prodi ])
+
+
+    # membuat dokumen baru
+    doc = SimpleDocTemplate(response, pagesize=A4, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
+    styles = getSampleStyleSheet()
+
+    # pengaturan tabel di pdf
+    table_style = TableStyle([
+                               ('ALIGN',(1,1),(-2,-2),'LEFT'),
+                               ('FONT', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('VALIGN',(0,0),(0,-1),'TOP'),
+                               ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+                               ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+                           ])
+    pendaftar_table = Table(table_data, colWidths=[doc.width/4.0]*2)
+    pendaftar_table.setStyle(table_style)
+
+    # mengisi pdf
+    content = []
+    content.append(Paragraph('Daftar Rekapan Mahasiswa Pendaftar Beasiswa Astra', styles['Title']))
+    content.append(Spacer(1,12))
+    content.append(Paragraph('Berikut ini adalah rekapannya' , styles['Normal']))
+    content.append(Spacer(1,12))
+    content.append(pendaftar_table)
+    content.append(Spacer(1,36))
+    content.append(Paragraph('Mengetahui, ', styles['Normal']))
+    content.append(Spacer(1,48))
+    content.append(Paragraph('Wakil Dekan III ', styles['Normal']))
+
+    # menghasilkan pdf untk di download
+    doc.build(content)
+    return response
+
+def cetak_rekap_diterima(request):
+    # pengaturan respon berformat pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="penerima.pdf"'
+
+    # mengambil daftar kehadiran dan mengubahnya menjadi data ntuk tabel
+    data = hasil_kalkulasi.objects.filter(diterima=True)
+    table_data = []
+    table_data.append([ "Nama", "NIM","Fakultas","Prodi" ])
+    for x in data:
+        table_data.append([ x.nama, x.nim,x.fakultas,x.prodi ])
+
+
+    # membuat dokumen baru
+    doc = SimpleDocTemplate(response, pagesize=A4, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
+    styles = getSampleStyleSheet()
+
+    # pengaturan tabel di pdf
+    table_style = TableStyle([
+                               ('ALIGN',(1,1),(-2,-2),'RIGHT'),
+                               ('FONT', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('VALIGN',(0,0),(0,-1),'TOP'),
+                               ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+                               ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+                           ])
+    kehadiran_table = Table(table_data, colWidths=[doc.width/4.0]*2)
+    kehadiran_table.setStyle(table_style)
+
+    # mengisi pdf
+    content = []
+    content.append(Paragraph('Daftar Penerima Beasiswa Astra' , styles['Title']))
+    content.append(Spacer(1,12))
+    content.append(Paragraph('Berikut adalah daftar mahasiswa :' , styles['Normal']))
+    content.append(Spacer(1,12))
+    content.append(kehadiran_table)
+    content.append(Spacer(1,36))
+    content.append(Paragraph('Mengetahui, ', styles['Normal']))
+    content.append(Spacer(1,48))
+    content.append(Paragraph('Wakil Dekan III,', styles['Normal']))
+
+    # menghasilkan pdf untk di download
+    doc.build(content)
+    return response
+
+def cetak_rekapan_ditolak(request):
+    # pengaturan respon berformat pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="daftar_ditolak.pdf"'
+
+    # mengambil daftar kehadiran dan mengubahnya menjadi data ntuk tabel
+    data = hasil_kalkulasi.objects.filter(diterima=False)
+    table_data = []
+    table_data.append([ "Nama", "NIM", "Fakultas", "Prodi" ])
+    for x in data:
+        table_data.append([ x.nama, x.nim,x.fakultas,x.prodi ])
+
+
+    # membuat dokumen baru
+    doc = SimpleDocTemplate(response, pagesize=A4, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
+    styles = getSampleStyleSheet()
+
+    # pengaturan tabel di pdf
+    table_style = TableStyle([
+                               ('ALIGN',(1,1),(-2,-2),'RIGHT'),
+                               ('FONT', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('VALIGN',(0,0),(0,-1),'TOP'),
+                               ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+                               ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+                           ])
+    kehadiran_table = Table(table_data, colWidths=[doc.width/4.0]*2)
+    kehadiran_table.setStyle(table_style)
+
+    # mengisi pdf
+    content = []
+    content.append(Paragraph('Daftar Mahasiswa yang tidak lolos', styles['Title']))
+    content.append(Spacer(1,12))
+    content.append(Paragraph('Berikut ini adalah hasilnya :' , styles['Normal']))
+    content.append(Spacer(1,12))
+    content.append(kehadiran_table)
+    content.append(Spacer(1,36))
+    content.append(Paragraph('Mengetahui, ', styles['Normal']))
+    content.append(Spacer(1,48))
+    content.append(Paragraph('Wakil Dekan III, ', styles['Normal']))
+
+    # menghasilkan pdf untk di download
+    doc.build(content)
+    return response
+
+def cetak_rekapan_sorting(request,tahun,prodi,fakultas):
+    # pengaturan respon berformat pdf
+    filename = "rekapan_"+ str(fakultas) +"_"+str(tahun)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=' + filename + '.pdf'
+
+    # mengambil daftar kehadiran dan mengubahnya menjadi data ntuk tabel
+    data = tb_akun_member.objects.filter(tgl_daftar__year=tahun,prodi=prodi,fakultas=fakultas)
+    table_data = []
+    table_data.append([ "Nama", "NIM","Fakultas","Prodi" ])
+    for x in data:
+        table_data.append([ x.nama, x.nim,x.fakultas,x.prodi ])
+
+
+    # membuat dokumen baru
+    doc = SimpleDocTemplate(response, pagesize=A4, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
+    styles = getSampleStyleSheet()
+
+    # pengaturan tabel di pdf
+    table_style = TableStyle([
+                               ('ALIGN',(1,1),(-2,-2),'LEFT'),
+                               ('FONT', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('VALIGN',(0,0),(0,-1),'TOP'),
+                               ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+                               ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+                           ])
+    sorting_table = Table(table_data, colWidths=[doc.width/4.0]*2)
+    sorting_table.setStyle(table_style)
+
+    # mengisi pdf
+    content = []
+    content.append(Paragraph('Daftar Rekapan Mahasiswa Pendaftar Beasiswa Astra', styles['Title']))
+    content.append(Spacer(1,12))
+    content.append(Paragraph('Berikut ini adalah rekapannya berdasarkan /%s/%s/%s'%(fakultas,prodi,tahun) , styles['Normal']))
+    content.append(Spacer(1,12))
+    content.append(sorting_table)
+    content.append(Spacer(1,36))
+    content.append(Paragraph('Mengetahui, ', styles['Normal']))
+    content.append(Spacer(1,48))
+    content.append(Paragraph('Wakil Dekan III ', styles['Normal']))
+
+    # menghasilkan pdf untk di download
+    doc.build(content)
+    return response

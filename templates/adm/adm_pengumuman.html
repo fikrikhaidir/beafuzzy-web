@@ -9,6 +9,12 @@
 
 <div class="container-fluid" id="containerPills">
     <div class="col-md-12">
+            <div class="mailbox-controls">
+              <a class="btn btn-success btn-sm" href="{% url 'dashboard:adm_cetak_pendaftar' %}"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Rekap Pendaftar</a>
+            <a class="btn btn-success btn-sm" href="{% url 'dashboard:adm_cetak_diterima' %}"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Rekap Diterima</a>
+            <a class="btn btn-success btn-sm" href="{% url 'dashboard:adm_cetak_ditolak' %}"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Rekap Ditolak</a>
+
+
             <div class="pull-right">
                 <form class="form-inline" method="GET">
                     <div class="form-group">
@@ -17,6 +23,7 @@
                     </div>
                 </form>
             </div>
+</div>
         </div>
     </div>
 
