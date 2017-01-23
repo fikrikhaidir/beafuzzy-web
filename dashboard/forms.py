@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import check_password
 from .models import data_member,data_admin,berita,pesan_admin,pesan_user,timeline,faq
 from pagedown.widgets import PagedownWidget
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
 #----------------------------------------- form untuk register atau mendaftar beasiswa ---------------------------
 tahun_lahir_pilihan = [thn for thn in range(1945,2016)]
@@ -144,4 +145,17 @@ class form_faq(forms.ModelForm):
         fields= [
             'pertanyaan',
             'jawaban',
+        ]
+
+class ganti_password(PasswordChangeForm):
+    # old_password = forms.CharField(widget=forms.PasswordInput, label='Password Lama', error_messages={'required':'Mohon diisi (Nama Depan) Anda'})
+    # # new_password = forms.CharField(widget=forms.PasswordInput, label='Password Baru', error_messages={'required':'Mohon diisi (Nama Depan) Anda'})
+    # # new_confirmation_password = forms.CharField(widget=forms.PasswordInput, label='Konfirmasi Password', error_messages={'required':'Mohon diisi (Nama Depan) Anda'})
+
+    class Meta :
+        model = User
+        fields = [
+            'old_password',
+            'new_password',
+            'new_confirmation_password',
         ]

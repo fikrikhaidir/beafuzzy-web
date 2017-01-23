@@ -46,13 +46,59 @@
                           <td>{{instance.alamat}}</td>
                         </tr>
                         <tr>
-                          <td>Email :</td>
-                          <td><a href="mailto:info@support.com">{{email}}</a></td>
+                          <!-- <td>Email :</td>
+                          <td><a href="mailto:info@support.com">{{email}}</a></td> -->
                         </tr>
                           <td>Phone Number</td>
-                          <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
+                          <td>{{instance.telepon}}
                           </td>
+                          <tr>
+                            <td>Indeks Prestasi Kumulatif :</td>
+                            <td>{{instance.ipk}}&nbsp;&nbsp;&nbsp;
+                              <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#transkrip"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Periksa</button>
+                            </td>
 
+                          </tr>
+                          <tr>
+                            <td>Penghasilan Orang Tua :</td>
+                            <td>{{instance.pot}}&nbsp;&nbsp;&nbsp;
+                              <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#pot"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Periksa</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Tanggungan Orang Tua :</td>
+                            <td>{{instance.tan}}&nbsp;&nbsp;&nbsp;
+                              <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#tan"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Periksa</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Prestasi :</td>
+                            {% if instance.pre == 0.55 %}
+                            <td>Pasif
+                            {%  elif instance.pre == 1.75 %}
+                            <td>Regional
+                            {%  elif instance.pre == 3.45 %}
+                            <td>Nasional
+                            {%  elif instance.pre == 5.5 %}
+                            <td>Internasional
+                            {% endif %}
+                            &nbsp;&nbsp;&nbsp;<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#prestasi"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Periksa</button>
+                          </td>
+                          </tr>
+                          <tr>
+                            <td>Organisasi :</td>
+                            {% if instance.org == 0.55 %}
+                            <td>Pasif
+                            {%  elif instance.org == 1.75 %}
+                            <td>Regional
+                            {%  elif instance.org == 3.45 %}
+                            <td>Nasional
+                            {%  elif instance.org == 5.5 %}
+                            <td>Internasional
+                            {% endif %}
+                            &nbsp;&nbsp;&nbsp;<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#prestasi"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Periksa</button>
+                          </td>
+                          </tr>
                         </tr>
 
                       </tbody>
@@ -69,4 +115,52 @@
                       </div>
 
             </div>
+
+
+            <div class="modal fade" id="transkrip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                <div class="loginmodal-container">
+                  <h1>Bukti Transkrip</h1><br>
+                  <div class="container-fluid">
+                  <img class="img-responsive" src="{{instance.transkrip.url}}" />
+
+                </div>
+                </div>
+              </div>
+              </div>
+
+              <div class="modal fade" id="pot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                  <div class="modal-dialog">
+                  <div class="loginmodal-container">
+                    <h1>Bukti Transkrip</h1><br>
+                    <img class="img-responsive" src="{{instance.bukti_pot.url}}" />
+                  </div>
+                </div>
+                </div>
+
+              <div class="modal fade" id="tan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                  <div class="modal-dialog">
+                  <div class="loginmodal-container">
+                    <h1>Bukti Transkrip</h1><br>
+                    <img class="img-responsive" src="{{instance.bukti_tan.url}}" />
+                  </div>
+                </div>
+                </div>
+
+              <div class="modal fade" id="prestasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                  <div class="modal-dialog">
+                  <div class="loginmodal-container">
+                    <h1>Bukti Transkrip</h1><br>
+                    <img class="img-responsive" src="{{instance.bukti_prestasi.url}}" />
+                  </div>
+                </div>
+                </div>
+                <div class="modal fade" id="organisasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                    <div class="loginmodal-container">
+                      <h1>Bukti Transkrip</h1><br>
+                      <img class="img-responsive" src="{{instance.bukti_organisasi.url}}" />
+                    </div>
+                  </div>
+                  </div>
 {% endblock content %}

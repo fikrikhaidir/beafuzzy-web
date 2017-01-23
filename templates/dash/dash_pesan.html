@@ -43,7 +43,7 @@
                       <tbody>
                         <tr>
                   {% for obj in instance %}
-                          <td class="mailbox-name"><a href="read-mail.html">Admin Beafuzzy</a></td>
+                          <td class="mailbox-name"><a href="{% url 'dashboard:baca_pesan' id=obj.id %}">Admin Beafuzzy</a></td>
                           {% if obj.dibaca %}
                           <td><p><span class="label label-success">Terbaca</span></p></td>
                           {% else %}

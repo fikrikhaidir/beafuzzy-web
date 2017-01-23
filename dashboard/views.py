@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404,HttpRequest
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import isi_data_member,isi_data_admin,form_berita,form_pesan_admin,form_pesan_user,form_timeline_penerimaan,form_timeline_pengumuman,form_timeline_seleksi,form_timeline_review,form_timeline_pendaftaran,form_faq
+from .forms import isi_data_member,isi_data_admin,form_berita,form_pesan_admin,form_pesan_user,form_timeline_penerimaan,form_timeline_pengumuman,form_timeline_seleksi,form_timeline_review,form_timeline_pendaftaran,form_faq,ganti_password
 from .models import data_member,data_admin,hasil_kalkulasi,berita,pesan_admin,pesan_user,timeline,faq
 from django.utils import timezone
 from django import template
@@ -18,6 +18,8 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib import colors
+
+from django.contrib.auth import update_session_auth_hash
 
 @login_required
 def dashboard_home(request):
@@ -210,7 +212,7 @@ def pesan(request):
     form=form_pesan_user(request.POST or None)
     context = {
         'formPesan':form,
-        'listPesan':listPesan,
+        'instance':listPesan,
     }
     if form.is_valid():
         instance = form.save(commit=False)
@@ -265,9 +267,20 @@ def view_faq(request):
 
 @login_required
 def pengaturan(request):
-    context={
-
+    if request.method == 'POST':
+        form_password = ganti_password(request.user, data=request.POST)
+        if form_password.is_valid():
+            form_password.save()
+            update_session_auth_hash(request, form_password.user) #harus login terlebih dahulu
+            messages.success(request, "Password sudah terganti.")
+            # return redirect("/")
+    else:
+        form_password =ganti_password(request.user)
+    context = {
+        'form': form_password,
+        'title' : 'ganti password',
     }
+
     context['username']=request.session['nama']
     context['fakultas']=request.session['fakultas']
     context['ava_url']=request.session['ava_url']
