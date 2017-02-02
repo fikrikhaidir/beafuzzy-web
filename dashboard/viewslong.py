@@ -321,10 +321,12 @@ def cetak_rekap_pendaftar(request):
     # mengambil daftar kehadiran dan mengubahnya menjadi data ntuk tabel
     data = data_member.objects.all()
     table_data = []
-    table_data.append([ "Nama","NIM","Fakultas","Prodi" ])
+    table_data.append(["No.", "Nama","NIM","Fakultas","Prodi" ])
+    nomor = 1
     for x in data:
-        table_data.append([ x.nama, x.nim, x.fakultas, x.prodi ])
 
+        table_data.append([nomor, x.nama, x.nim, x.fakultas, x.prodi ])
+        nomor +=1
 
     # membuat dokumen baru
     doc = SimpleDocTemplate(response, pagesize=A4, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
@@ -365,9 +367,11 @@ def cetak_rekap_diterima(request):
     # mengambil daftar kehadiran dan mengubahnya menjadi data ntuk tabel
     data = hasil_kalkulasi.objects.filter(diterima=True)
     table_data = []
-    table_data.append([ "Nama", "NIM","Fakultas","Prodi" ])
+    table_data.append(["No." "Nama", "NIM","Fakultas","Prodi" ])
+    nomor = 1
     for x in data:
-        table_data.append([ x.nama, x.nim,x.fakultas,x.prodi ])
+        table_data.append([nomor, x.nama, x.nim,x.fakultas,x.prodi ])
+        nomor+=1
 
 
     # membuat dokumen baru
@@ -407,12 +411,13 @@ def cetak_rekapan_ditolak(request):
     response['Content-Disposition'] = 'attachment; filename="daftar_ditolak.pdf"'
 
     # mengambil daftar kehadiran dan mengubahnya menjadi data ntuk tabel
-    data = hasil_kalkulasi.objects.filter(diterima=False)
+    data = hasil_kalkulasi.objects.filter(tunggu=False,diterima=False)
     table_data = []
-    table_data.append([ "Nama", "NIM", "Fakultas", "Prodi" ])
+    table_data.append(["no", "Nama", "NIM", "Fakultas", "Prodi" ])
+    nomor = 1
     for x in data:
-        table_data.append([ x.nama, x.nim,x.fakultas,x.prodi ])
-
+        table_data.append([nomor, x.nama, x.nim,x.fakultas,x.prodi ])
+        nomor+=1
 
     # membuat dokumen baru
     doc = SimpleDocTemplate(response, pagesize=A4, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)

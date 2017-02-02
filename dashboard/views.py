@@ -211,17 +211,18 @@ def pesan(request):
     akun  = request.user
     if akun.is_superuser and akun.is_staff:
         return redirect('dashboard:adm_pesan')
-    listPesan = pesan_admin.objects.filter(penerima=akun)
+    instance = pesan_admin.objects.filter(penerima=akun)
     form=form_pesan_user(request.POST or None)
     context = {
         'formPesan':form,
-        'instance':listPesan,
+        'instance':instance,
     }
     if form.is_valid():
         instance = form.save(commit=False)
         instance.pengirim = request.user
         instance.save()
         return redirect('dashboard:pesan')
+    kunci = request.GET.get('kunci')
     if kunci:
         queryset_list=instance.filter(Q(content__icontains=kunci)).distinct()
         context['instance']=queryset_list

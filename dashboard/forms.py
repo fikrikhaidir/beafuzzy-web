@@ -23,6 +23,7 @@ class isi_data_member(forms.ModelForm):
             "avatar",
             "fakultas",
             "prodi",
+            "telepon",
             "nim",
             "ktm",
             "alamat",

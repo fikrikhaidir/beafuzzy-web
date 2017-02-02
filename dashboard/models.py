@@ -13,7 +13,7 @@ class data_member(models.Model):
     nama = models.CharField(null=False, max_length=35, default='')
     avatar = models.ImageField(upload_to='upload/avatar,',null=True,blank=True,verbose_name='avatar',default='' )
     fakultas = models.CharField(null=False, max_length=40, default='')
-    telepon = models.CharField(null=True,max_length=18,default='')
+    telepon = models.CharField(null=True,blank=True,max_length=18,default='')
     prodi = models.CharField(null=False, max_length=40, default='')
     nim = models.CharField(null=False, max_length=10, default='', verbose_name='NIM')
     ktm = models.ImageField(upload_to='upload/ktm', default='', verbose_name='KTM')
