@@ -21,8 +21,8 @@
   <div class="col-md-10 col-xs-12">
 
       <form method='POST' enctype="multipart/form-data" action=''>
-        {% csrf_token %}
-        {{formBerita|crispy}}
+            {% csrf_token %}
+            {{formBerita|crispy}}
             <button type="submit" class="btn btn-success">Submit</Button>
       </form>
       <div class="col-md-1 col-xs-0">

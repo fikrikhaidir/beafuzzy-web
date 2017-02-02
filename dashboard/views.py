@@ -201,6 +201,9 @@ def edit_profile(request,id=id):
         instance = form.save(commit=False)
         instance.save()
         return redirect('dashboard:profile')
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,'dash/dash_edit_profile.html',(context))
 
 @login_required
@@ -219,6 +222,9 @@ def pesan(request):
         instance.pengirim = request.user
         instance.save()
         return redirect('dashboard:pesan')
+    if kunci:
+        queryset_list=instance.filter(Q(content__icontains=kunci)).distinct()
+        context['instance']=queryset_list
     context['username']=request.session['nama']
     context['fakultas']=request.session['fakultas']
     context['ava_url']=request.session['ava_url']

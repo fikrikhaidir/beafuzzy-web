@@ -62,7 +62,7 @@ class isi_data_admin(forms.ModelForm):
 class form_berita(forms.ModelForm):
     judul = forms.CharField(label='Judul Berita', error_messages={'required': 'Mohon diisi judul'})
     image = forms.ImageField(label='Sematkan Gambar', error_messages={'required': 'Mohon diisi gambar'})
-    content = forms.CharField(widget=PagedownWidget())
+    content = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = berita
         fields = [

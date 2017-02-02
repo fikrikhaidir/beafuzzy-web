@@ -23,13 +23,16 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="{% url 'dashboard:adm_cetak_ditolak' %}">Rekapitulasi Ditolak&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge"><i class="fa fa-times fa-lg"></i></span></a></li>
                         </ul>
+                        {% if user.is_superuser %}
                         <a type="button" href="{% url 'dashboard:del_hasil_kalkulasi' %}" class="btn btn-danger">Delete Objects</a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
                     <div class="pull-right">
                         <form class="form-inline" method="GET">
                             <div class="form-group">
+                                <a href="{% url 'dashboard:adm_pengumuman' %} " class="btn btn-default btn-sm"><i class="glyphicon glyphicon-refresh"></i> &nbsp; Refresh</a>
                                 <input type="text" id="kunci" name="kunci" class="form-control input-sm" maxlength="30" placeholder="Cari Pendaftar" />
                                 <button type="submit" class="btn btn-default btn-sm">Cari</button>
 
@@ -53,6 +56,7 @@
 
                         {% csrf_token %}
                         <select name="prodi" class="form-control input-sm">
+
                       <option>Teknik Mesin</option>
                       <option>Teknik Arsitektur</option>
                       <option>Teknik Sipil</option>
@@ -62,6 +66,7 @@
                     </select>
 
                         <select name="fakultas" class="form-control input-sm">
+
                       <option>Teknik</option>
                       <option>Komunikasi dan Informatika</option>
                         </select>
@@ -145,7 +150,7 @@
                             {% if user.is_superuser %}
                             {% if obj.tunggu %}
                             <a class="btn btn-success btn-sm" id="btnPengumuman" href="{% url 'dashboard:terima' id=obj.akun %}"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;Terima &nbsp;</a>
-                            <br /><a class="btn btn-danger btn-sm" id="btnPengumuman" href="#"><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;Tolak&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            <br /><a class="btn btn-danger btn-sm" id="btnPengumuman" href="{% url 'dashboard:tolak' id=obj.akun %}"><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;Tolak&nbsp;&nbsp;&nbsp;&nbsp;</a>
                             {% else %}
                             <button class="btn btn-success btn-sm" id="btnPengumuman" disabled="disabled"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;Terima &nbsp;</button>
                             <br /><a class="btn btn-danger btn-sm" id="btnPengumuman" disabled="disabled"><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;Tolak&nbsp;&nbsp;&nbsp;&nbsp;</a>

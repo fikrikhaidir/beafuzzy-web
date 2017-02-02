@@ -13,6 +13,8 @@ import datetime
 from django.db import connection
 from django.db.models import Q
 from django.contrib.gis.geoip2 import GeoIP2
+from django.core.files.uploadhandler import FileUploadHandler
+
 
 from processors.fuzzify import fuzzifyIPK,fuzzifyORG,fuzzifyPOT,fuzzifyPRE,fuzzifyTAN
 from processors.rules import rulesMin
@@ -40,8 +42,38 @@ def adm_berita(request):
     context={
         'formBerita' : form,
     }
-
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,"adm/adm_berita.html",(context))
+
+
+@login_required
+def del_berita(request,id=id):
+    if not request.user.is_superuser:
+        return redirect('dashboard:berita')
+    instance = berita.objects.get(id=id)
+    instance.delete()
+    return redirect('dashboard:berita')
+
+
+@login_required
+def edit_berita(request,id=id):
+    if not request.user.is_superuser:
+        return redirect('dashboard:berita')
+    instance=berita.objects.get(id=id)
+    form=form_berita(request.POST or None, request.FILES or None,instance=instance)
+    context = {
+        'form':form,
+    }
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return redirect('dashboard:berita   ')
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
+    return render(request,'adm/edit_berita.html',(context))
 
 @login_required
 def pengumuman(request):
@@ -59,11 +91,36 @@ def pengumuman(request):
         prodi = request.POST['prodi']
         fakultas = request.POST['fakultas']
         filter_fakultas = hasil_kalkulasi.objects.filter(fakultas=fakultas, prodi=prodi).order_by("-rek")
-        # context['filter_fakultas'] = filter_fakultas
-        # context['prodi'] = prodi
-        # context['fakultas'] = fakultas
         context['instance']=filter_fakultas
+    kunci = request.GET.get('kunci')
+    if kunci:
+        queryset_list=instance.filter(Q(nama__icontains=kunci))
+        context['instance']=queryset_list
     return render(request,"adm/adm_pengumuman.html",(context))
+
+@login_required
+def terima_pendaftar(request,id=id):
+    if request.user.is_superuser:
+
+        instance = get_object_or_404(hasil_kalkulasi,akun=id)
+        instance.diterima=True
+        instance.tunggu =False
+        instance.save()
+    else:
+        raise Http404
+    return redirect('dashboard:adm_pengumuman')
+
+@login_required
+def tolak_pendaftar(request,id=id):
+    if request.user.is_superuser:
+
+        instance = get_object_or_404(hasil_kalkulasi,akun=id)
+        instance.diterima=False
+        instance.tunggu =False
+        instance.save()
+    else:
+        raise Http404
+    return redirect('dashboard:adm_pengumuman')
 
 @login_required
 def adm_profile(request):
@@ -155,6 +212,11 @@ def adm_listPendaftar(request):
         'nomor':1,
     }
     kunci = request.GET.get('kunci')
+    if request.method == 'POST':
+        prodi = request.POST['prodi']
+        fakultas = request.POST['fakultas']
+        filter_fakultas = instance.filter(fakultas=fakultas, prodi=prodi).order_by('valid')
+        context['instance']=filter_fakultas
     if kunci:
         queryset_list=instance.filter(Q(nama__icontains=kunci)).distinct()
         context['instance']=queryset_list
@@ -207,27 +269,7 @@ def validasi_pendaftar(request,id=id):
         raise Http404
     return redirect('dashboard:listPendaftar')
 
-def terima_pendaftar(request,id=id):
-    if request.user.is_superuser:
 
-        instance = get_object_or_404(hasil_kalkulasi,akun=id)
-        instance.diterima=True
-        instance.tunggu =False
-        instance.save()
-    else:
-        raise Http404
-    return redirect('dashboard:adm_pengumuman')
-
-def tolak_pendaftar(request,id=id):
-    if request.user.is_superuser:
-
-        instance = get_object_or_404(hasil_kalkulasi,akun=id)
-        instance.diterima=False
-        instance.tunggu =False
-        instance.save()
-    else:
-        raise Http404
-    return redirect('dashboard:adm_pengumuman')
 
 def cetakTest(request):
     response = HttpResponse(content_type='application/pdf')
@@ -265,28 +307,11 @@ def edit_faq(request,id=id):
         i = form.save(commit=False)
         i.save()
         return redirect('dashboard:faq')
+    context['username']=request.session['nama']
+    context['fakultas']=request.session['fakultas']
+    context['ava_url']=request.session['ava_url']
     return render(request,'adm/edit_faq.html',(context))
 
-def del_berita(request,id=id):
-    if not request.user.is_superuser:
-        return redirect('dashboard:berita')
-    instance = berita.objects.get(id=id)
-    instance.delete()
-    return redirect('dashboard:berita')
-
-def edit_berita(request,id=id):
-    if not request.user.is_superuser:
-        return redirect('dashboard:berita')
-    instance = berita.objects.get(id=id)
-    form = form_berita(request.POST or None,instance=instance)
-    context = {
-        'form':form,
-    }
-    if form.is_valid():
-        i = form.save(commit=False)
-        i.save()
-        return redirect('dashboard:berita')
-    return render(request,'adm/edit_berita.html',(context))
 
 def cetak_rekap_pendaftar(request):
     # pengaturan respon berformat pdf
@@ -415,51 +440,6 @@ def cetak_rekapan_ditolak(request):
     content.append(Paragraph('Mengetahui, ', styles['Normal']))
     content.append(Spacer(1,48))
     content.append(Paragraph('Wakil Dekan III, ', styles['Normal']))
-
-    # menghasilkan pdf untk di download
-    doc.build(content)
-    return response
-
-def cetak_rekapan_sorting(request,tahun,prodi,fakultas):
-    # pengaturan respon berformat pdf
-    filename = "rekapan_"+ str(fakultas) +"_"+str(tahun)
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=' + filename + '.pdf'
-
-    # mengambil daftar kehadiran dan mengubahnya menjadi data ntuk tabel
-    data = tb_akun_member.objects.filter(tgl_daftar__year=tahun,prodi=prodi,fakultas=fakultas)
-    table_data = []
-    table_data.append([ "Nama", "NIM","Fakultas","Prodi" ])
-    for x in data:
-        table_data.append([ x.nama, x.nim,x.fakultas,x.prodi ])
-
-
-    # membuat dokumen baru
-    doc = SimpleDocTemplate(response, pagesize=A4, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
-    styles = getSampleStyleSheet()
-
-    # pengaturan tabel di pdf
-    table_style = TableStyle([
-                               ('ALIGN',(1,1),(-2,-2),'LEFT'),
-                               ('FONT', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                               ('VALIGN',(0,0),(0,-1),'TOP'),
-                               ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
-                               ('BOX', (0,0), (-1,-1), 0.25, colors.black),
-                           ])
-    sorting_table = Table(table_data, colWidths=[doc.width/4.0]*2)
-    sorting_table.setStyle(table_style)
-
-    # mengisi pdf
-    content = []
-    content.append(Paragraph('Daftar Rekapan Mahasiswa Pendaftar Beasiswa Astra', styles['Title']))
-    content.append(Spacer(1,12))
-    content.append(Paragraph('Berikut ini adalah rekapannya berdasarkan /%s/%s/%s'%(fakultas,prodi,tahun) , styles['BodyText']))
-    content.append(Spacer(1,12))
-    content.append(sorting_table)
-    content.append(Spacer(1,36))
-    content.append(Paragraph('Mengetahui, ', styles['Normal']))
-    content.append(Spacer(1,48))
-    content.append(Paragraph('Wakil Dekan III ', styles['Normal']))
 
     # menghasilkan pdf untk di download
     doc.build(content)
