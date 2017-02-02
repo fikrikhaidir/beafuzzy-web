@@ -2,9 +2,9 @@ def fuzzifyIPK(ipk):
     rendah = 0
     sedang = 0
     tinggi = 0
-    a1,b1 ,c1 = 3.0 , 3.2, 3.34
-    a2,b2 ,c2 = 3.25 , 3.48, 3.59
-    a3,b3 ,c3 = 3.51, 3.61, 4.0
+    a1,b1 ,c1 = 2.7 , 2.9, 3.22
+    a2,b2 ,c2 = 3.11 , 3.32, 3.54
+    a3,b3 ,c3 = 3.43, 3.71, 4.0
     MuSedang = 0
     MuRendah = 0
     MuTinggi = 0
@@ -43,7 +43,7 @@ def fuzzifyIPK(ipk):
         else:
             MuSedang = 0
 
-    if (ipk >= 3.51):     #Barrier Ketiga, untuk keanggotaan "Tinggi"
+    if (ipk >= a3):     #Barrier Ketiga, untuk keanggotaan "Tinggi"
 
         if (ipk>=a3 and ipk < b3):
             temp1 = ipk-a3
@@ -68,16 +68,16 @@ def fuzzifyIPK(ipk):
 
 
 def fuzzifyTAN(tan):
-    a1,b1 ,c1 = -1.4, 1, 3.4 #untuk tantasi rendah dari tingkat prodi dan fakultas
-    a2,b2 ,c2 = 1.6 ,4 ,6.4 #untuk tantasi sedang dari tingkat universitas
-    a3,b3 ,c3 = 4.6, 7, 9.4 #untuk tingkat nasional dan internasional
+    a1,b1 ,c1 = 0, 2, 3.4 #untuk tantasi rendah dari tingkat prodi dan fakultas
+    a2,b2 ,c2 = 2.6 ,3.5 ,4.8 #untuk tantasi sedang dari tingkat universitas
+    a3,b3 ,c3 = 4.5, 5, 6 #untuk tingkat nasional dan internasional
     MuSedang = 0
     MuRendah = 0
     MuTinggi = 0
 
     tan = float(tan)                    #Convert masukan menjadi float
 
-    if (tan<= 3.3):        #Barrier pertama, untuk keanggotaan "Rendah"
+    if (tan<= c1):        #Barrier pertama, untuk keanggotaan "Rendah"
 
         if (tan<=b1):
             MuRendah = 1
@@ -91,7 +91,7 @@ def fuzzifyTAN(tan):
             MuRendah = 0
 
 
-    if (tan> 1.6 and tan <=6.4):       #Barrier kedua, untuk keanggotaan "Sedang"
+    if (tan> a2 and tan <=c2):       #Barrier kedua, untuk keanggotaan "Sedang"
 
         if (tan>=a2 and tan< b2):
             temp1 = tan-a2
@@ -109,7 +109,7 @@ def fuzzifyTAN(tan):
         else:
             MuSedang = 0
 
-    if (tan >= 7):     #Barrier Ketiga, untuk keanggotaan "Tinggi" dengan asumsi jarang ada yang punya keturunan lebih dari 12
+    if (tan >= c3):     #Barrier Ketiga, untuk keanggotaan "Tinggi" dengan asumsi jarang ada yang punya keturunan lebih dari 12
 
         if (tan>=a3 and tan <b3):
             temp1 = tan-a3
@@ -137,16 +137,16 @@ def fuzzifyPOT(pot):
     rendah = 0
     sedang = 0
     tinggi = 0
-    a1,b1 ,c1 = 250000,750000, 1800000
-    a2,b2 ,c2 = 900000,2499999 , 2999999
-    a3,b3 ,c3 = 2400000, 3100000, 5000011
+    a1,b1 ,c1 = 500000,1830000, 3666666
+    a2,b2 ,c2 = 2745000,4570000 , 6411000
+    a3,b3 ,c3 = 5490000, 7320000, 9111000
     MuSedang = 0
     MuRendah = 0
     MuTinggi = 0
 
     pot = float(pot)         #Convert masukan menjadi float
 
-    if(pot >= 2400000):  #Barrier kedua, untuk keanggotaan "Rendah"
+    if(pot >= a3):  #Barrier kedua, untuk keanggotaan "Rendah"
 
        if (pot>= b3):
            MuRendah = 1
@@ -159,7 +159,7 @@ def fuzzifyPOT(pot):
        else:
            MuRendah = 0
 
-    if (pot>= 900000 and pot <=2999999):       #Barrier kedua, untuk keanggotaan "Sedang"
+    if (pot >= a2 and pot <=c2):       #Barrier kedua, untuk keanggotaan "Sedang"
 
         if (pot>=a2 and pot<= b2):
             temp1 = pot-a2
@@ -177,7 +177,7 @@ def fuzzifyPOT(pot):
         else:
             MuSedang = 0
 
-    if (pot <= 1800000  ):     #Barrier Ketiga, untuk keanggotaan "Tinggi"
+    if (pot <= c1  ):     #Barrier Ketiga, untuk keanggotaan "Tinggi"
 
         if (pot< b1):
             MuTinggi = 1
@@ -264,11 +264,6 @@ def fuzzifyPRE(pre):
     MuTinggi = float(("%.2f" % MuTinggi))
 
     return MuRendah, MuSedang, MuTinggi   #Output Modul, nilai belum bisa di pass.
-
-
-#Testing di baris ini.
-#print MuSedang, MuRendah,MuTinggi
-
 
 
 def fuzzifyORG(org):

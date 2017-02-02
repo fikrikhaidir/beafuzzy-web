@@ -23,9 +23,9 @@ class data_member(models.Model):
     ipk = models.FloatField(null=False, max_length=5, default='',verbose_name='IPK')
     transkrip = models.ImageField(upload_to='upload/transkrip', default='', verbose_name='Transkrip Nilai')
     tan = models.FloatField(null=False, default='', verbose_name='Tanggungan Orang Tua')
-    bukti_tan = models.ImageField(upload_to='upload/bukti_tan', default='',verbose_name='Bukti Tanggungan Orang Tua. ex : Kartu Keluarga')
+    bukti_tan = models.ImageField(null=False, default='',upload_to='upload/bukti_tan',verbose_name='Bukti Tanggungan Orang Tua. ex : Kartu Keluarga')
     pot = models.FloatField(null=False, default='', verbose_name='Pendapatan Orang Tua/Bulan (Rp)')
-    bukti_pot =models.ImageField(upload_to='upload/bukti_pot',default='',verbose_name='Bukti Pendapatan Orang Tua. Ex : Slip Gaji')
+    bukti_pot =models.ImageField(null=False, default='',upload_to='upload/bukti_pot',verbose_name='Bukti Pendapatan Orang Tua. Ex : Slip Gaji')
     pre_choices_pre = (
         (0.55, '---Tidak Ada---'),
         (1.75 , 'Regional'),
@@ -33,7 +33,7 @@ class data_member(models.Model):
         (5.5 , 'Internasional'),
     )
     pre = models.FloatField(null=False, default='', choices=pre_choices_pre, verbose_name='Prestasi (Pilih prestasi yang paling tinggi)')
-    bukti_prestasi = models.ImageField(upload_to='upload/bukti_prestasi', default='', verbose_name='Bukti Prestasi')
+    bukti_prestasi = models.ImageField(null=True,blank=True,upload_to='upload/bukti_prestasi', default='', verbose_name='Bukti Prestasi')
     pre_choices_org = (
         (0.55, '---Tidak Ada---'),
         (1.75 , 'Regional'),
@@ -41,7 +41,7 @@ class data_member(models.Model):
         (5.5 , 'Internasional'),
     )
     org = models.FloatField(null=False, default='', choices=pre_choices_org, verbose_name='Organisasi (Pilih organisasi yang tertinggi)')
-    bukti_organisasi = models.ImageField(upload_to='upload/bukti_organisasi', default='',verbose_name='Bukti Organisasi')
+    bukti_organisasi = models.ImageField(null=True,blank=True,upload_to='upload/bukti_organisasi', default='',verbose_name='Bukti Organisasi')
     tgl_daftar = models.DateField(null=False, default='')
     daftar = models.BooleanField(default=False)
     valid = models.BooleanField(default=False)
@@ -87,6 +87,7 @@ class hasil_kalkulasi(models.Model):
     org = models.FloatField(null=False, default=0)
     ipk = models.FloatField(null=False, default=0)
     rek = models.FloatField(null=True, default=0)
+    tunggu = models.BooleanField(default=True)
     diterima = models.BooleanField(default=False)
 
 

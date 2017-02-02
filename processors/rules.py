@@ -410,7 +410,7 @@ def rulesMin(ipk, tan, pot, pre, org):
     z165 = tinggi
     z166 = sedang
     z167 = tinggi
-    z168 = rendah
+    z168 = sedang ##cintya
     z169 = rendah
     z170 = tinggi
     z171 = sedang
@@ -695,7 +695,7 @@ def rulesMin(ipk, tan, pot, pre, org):
     xr = 1
     yr = 'r'
     listR = []
-    for i in range(227):
+    for i in range(222):
         z = yr+str(xr)
         try:
             print z+" : ",eval(z)
@@ -707,7 +707,7 @@ def rulesMin(ipk, tan, pot, pre, org):
     xz = 1
     yz = 'zM'
     listZ = []
-    for i in range(227):
+    for i in range(222):
         z = yz+str(xz)
         try:
             print z+" : ",eval(z)
@@ -718,11 +718,15 @@ def rulesMin(ipk, tan, pot, pre, org):
 
 
     resultZ,resultR = sum(listZ),sum(listR)
-    # print "Result Sum dari Min * Z = ",resultZ
-    # print "Result Sum dari Min = ",resultR
-    result = resultZ/resultR
-    if(result < 0):
-        result = 0
+    print type(resultZ)
+    print ""
+    print "Result Sum dari Min * Z = ",resultZ
+    print "Result Sum dari Min = ",resultR
+    try:
+        result = resultZ/resultR
+        if(result < 0):
+            result = 0
+    except ZeroDivisionError:
+        result=0.0
     print "Z : ",result
-
     return result

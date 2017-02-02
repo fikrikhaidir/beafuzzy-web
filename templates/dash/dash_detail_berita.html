@@ -27,8 +27,8 @@
                 <div class="container-fluid panel-footer"> {{obj.timestamp}}
                     <div class="pull-right">
                       {% if user.is_superuser %}
-                      <a class="btn btn-danger btn-sm pull-right" href="{% url 'dashboard:del_faq' id=obj.id %}"> Hapus </a> &nbsp; &nbsp;
-                      <a class="btn btn-warning btn-sm pull-right" href="{% url 'dashboard:edit_faq' id=obj.id %}"> Ubah </a>
+                      <a class="btn btn-danger btn-sm pull-right" href="{% url 'dashboard:del_berita' id=obj.id %}"> Hapus </a> &nbsp; &nbsp;
+                      <a class="btn btn-warning btn-sm pull-right" href="{% url 'dashboard:edit_berita' id=obj.id %}"> Ubah </a>
                       {% endif %}
                     </div>
                 </div>

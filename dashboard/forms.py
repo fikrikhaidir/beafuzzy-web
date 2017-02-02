@@ -41,7 +41,6 @@ class isi_data_member(forms.ModelForm):
         ]
 
 class isi_data_admin(forms.ModelForm):
-    image = forms.ImageField(label='Sematkan Gambar')
     TanggalLahir = forms.DateField(
         widget=forms.SelectDateWidget(years=tahun_lahir_pilihan)
     )

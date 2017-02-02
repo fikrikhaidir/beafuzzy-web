@@ -1,79 +1,173 @@
-{% extends 'dash/dashbase.html' %}
-{% load staticfiles %}
-
-{% block content %}
+{% extends 'dash/dashbase.html' %} {% load staticfiles %} {% block content %}
 
 <div class="page-header">
     <h1>Pendaftar Tervalidasi <small>Daftar Lengkap Pelamar Beasiswa Tervalidasi</small></h1>
 </div>
 
 <div class="container-fluid" id="containerPills">
-    <div class="col-md-12">
-            <div class="mailbox-controls">
-              <a class="btn btn-success btn-sm" href="{% url 'dashboard:adm_cetak_pendaftar' %}"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Rekap Pendaftar</a>
-            <a class="btn btn-success btn-sm" href="{% url 'dashboard:adm_cetak_diterima' %}"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Rekap Diterima</a>
-            <a class="btn btn-success btn-sm" href="{% url 'dashboard:adm_cetak_ditolak' %}"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Rekap Ditolak</a>
+    <div class="row">
 
-
-            <div class="pull-right">
-                <form class="form-inline" method="GET">
-                    <div class="form-group">
-                        <input type="text" id="kunci" name="kunci" class="form-control input-sm" maxlength="30" placeholder="Cari Pendaftar" />
-                        <button type="submit" class="btn btn-default btn-sm">Cari</button>
+        <div class="col-md-12 col-xs-12">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info">Cetak &nbsp;<i class="fa fa-print fa-lg"></i></button>
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'dashboard:adm_cetak_pendaftar' %}">Rekapitulasi Pendaftar&nbsp;&nbsp;<span class="badge"><i class="fa fa-user fa-lg"></i></span></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'dashboard:adm_cetak_diterima' %}">Rekapitulasi Diterima&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge"><i class="fa fa-check fa-lg"></i></span></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'dashboard:adm_cetak_ditolak' %}">Rekapitulasi Ditolak&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge"><i class="fa fa-times fa-lg"></i></span></a></li>
+                        </ul>
+                        <a type="button" href="{% url 'dashboard:del_hasil_kalkulasi' %}" class="btn btn-danger">Delete Objects</a>
                     </div>
-                </form>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <div class="pull-right">
+                        <form class="form-inline" method="GET">
+                            <div class="form-group">
+                                <input type="text" id="kunci" name="kunci" class="form-control input-sm" maxlength="30" placeholder="Cari Pendaftar" />
+                                <button type="submit" class="btn btn-default btn-sm">Cari</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
+
+        </div>
+
+    </div>
 </div>
+<div class="container-fluid" id="containerPills">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="mailbox-controls">
+                <div class="pull-right">
+                    <form class="form-inline" method='POST' action="">
+
+                        {% csrf_token %}
+                        <select name="prodi" class="form-control input-sm">
+                      <option>Teknik Mesin</option>
+                      <option>Teknik Arsitektur</option>
+                      <option>Teknik Sipil</option>
+                      <option>Teknik Kimia</option>
+                      <option>Teknik Industri</option>
+                      <option>Teknik Elektro</option>
+                    </select>
+
+                        <select name="fakultas" class="form-control input-sm">
+                      <option>Teknik</option>
+                      <option>Komunikasi dan Informatika</option>
+                        </select>
+
+                        <!-- <select name="tahun" class="form-control input-sm">
+                      <option>2016</option>
+                      <option>2017</option>
+                    </select> -->
+                        <input class="btn btn-info btn-sm" type="submit" value="Tampilkan">
+
+                    </form>
+
+                </div>
+            </div>
         </div>
     </div>
 
-<br />
+</div>
+
+<hr>
+
 <div class="row">
-          <div class="table-responsive col-md-12">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Nama Lengkap</th><th>NIM</th><th>Fakultas</th><th>Status</th>
-                        <th>Program Studi</th><th>Opsi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  {% if instance != None %}
-                  {% for obj in instance %}
+    <div class="table-responsive col-md-12">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Nama Lengkap</th>
+                    <th>NIM</th>
+                    <th>Fakultas</th>
+                    <th>Rekomendasi</th>
+                    <th>Status</th>
+                    <th>Program Studi</th>
+                    <th>Opsi</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                    <tr>
-                        <td><p>{{obj.nama}}</p></td>
-                        <td><p>{{ obj.nim }}</p></td>
-                        <td><p>{{ obj.fakultas }}</p></p></td>
-                        {% if obj.diterima %}
-                        <td><p><span class="label label-success">Diterima</span></p></td>
-                        {% else %}
-                        <td><p><span class="label label-danger">Ditolak</span></p></td>
-                        {% endif %}
-                        <td><p>{{ obj.prodi }}</p></td>
-                        <td class="col-md-1"><p>
-                          {% if user.is_superuser %}
-                          {% if obj.diterima %}
-                          <button class="btn btn-success btn-sm" id="btnPengumuman" href="" disabled="disabled"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;Terima &nbsp;</button>
-                          {% else %}
-                          <a class="btn btn-success btn-sm" id="btnPengumuman" href="{% url 'dashboard:terima' id=obj.akun %}"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;Terima&nbsp;</a>
-                          {% endif %}
-                          <br /><a class="btn btn-danger btn-sm" id="btnPengumuman"  href="#"><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;Tolak&nbsp;&nbsp;&nbsp;</a>
-                          {% else %}
-                          {% endif %}
+                {% if instance != None %}
 
-                        </p></td>
-                    </tr>
-                    {% endfor %}
+                {% for obj in instance %}
+
+                <tr>
+                    <td>
+                      <p>{{forloop.counter}}</p>
+                    </td>
+                    <td>
+                        <p>{{obj.nama}}</p>
+                    </td>
+                    <td>
+                        <p>{{ obj.nim }}</p>
+                    </td>
+                    <td>
+                        <p>{{ obj.fakultas }}</p>
+                        </p>
+                    </td>
+                    <td>
+                        <p>{{ obj.rek }}</p>
+                        </p>
+                    </td>
+                    {% if obj.tunggu %}
+                    <td>
+                        <p><span class="label label-primary">Menunggu</span></p>
+                    </td>
+                    {% else %}
+                      {% if obj.diterima %}
+                      <td>
+                          <p><span class="label label-success">Diterima</span></p>
+                      </td>
+                      {% else %}
+                      <td>
+                          <p><span class="label label-danger">Ditolak</span></p>
+                      </td>
+                      {% endif %}
+                    {% endif %}
+                    <td>
+                        <p>{{ obj.prodi }}</p>
+                    </td>
+                    <td class="col-md-1">
+                        <p>
+                            {% if user.is_superuser %}
+                            {% if obj.tunggu %}
+                            <a class="btn btn-success btn-sm" id="btnPengumuman" href="{% url 'dashboard:terima' id=obj.akun %}"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;Terima &nbsp;</a>
+                            <br /><a class="btn btn-danger btn-sm" id="btnPengumuman" href="#"><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;Tolak&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            {% else %}
+                            <button class="btn btn-success btn-sm" id="btnPengumuman" disabled="disabled"><i class="fa fa-check-square-o fa-lg"></i>&nbsp;Terima &nbsp;</button>
+                            <br /><a class="btn btn-danger btn-sm" id="btnPengumuman" disabled="disabled"><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;Tolak&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+                            {% endif %}
+                            {% else %}
+                            {% endif %}
+
+                        </p>
+                    </td>
+                </tr>
+
+                {% endfor %}
 
 
-                </tbody>
-            </table>
-        </div>
-        <!-- <div class="col-md-1">
+            </tbody>
+        </table>
+    </div>
+    <!-- <div class="col-md-1">
 
       </div> -->
-        <!-- <div class="pull-right">
+    <!-- <div class="pull-right">
             <ul class="pagination">
                 <li><a href="#">«</a></li>
                 <li><a href="#">1</a></li>
@@ -82,15 +176,8 @@
                 <li><a href="#">»</a></li>
             </ul>
         </div> -->
-	</div>
+</div>
 
 
 
-{% else %}
-There's no data
-{% endif %}
-
-
-
-
-{% endblock content %}
+{% else %} There's no data {% endif %} {% endblock content %}

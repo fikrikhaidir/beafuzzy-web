@@ -82,7 +82,9 @@
                             {%  elif instance.pre == 5.5 %}
                             <td>Internasional
                             {% endif %}
+                            {% if instance.bukti_prestasi %}
                             &nbsp;&nbsp;&nbsp;<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#prestasi"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Periksa</button>
+                            {% endif %}
                           </td>
                           </tr>
                           <tr>
@@ -96,7 +98,10 @@
                             {%  elif instance.org == 5.5 %}
                             <td>Internasional
                             {% endif %}
-                            &nbsp;&nbsp;&nbsp;<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#prestasi"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Periksa</button>
+                            {% if instance.bukti_organisasi %}
+                            &nbsp;&nbsp;&nbsp;<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#organisasi"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Periksa</button>
+                            {% else %}
+                            {% endif %}
                           </td>
                           </tr>
                         </tr>
@@ -107,10 +112,15 @@
                 </div>
               </div>
                    <div class="panel-footer">
+                          {% if instance.valid %}
+                          <a type="button" disabled="disabled" class="btn btn-sm btn-primary"><i class="fa fa-check-square"></i>&nbsp;Validasi</a>
+                          {% else %}
                           <a href='{% url "dashboard:adm_validasi" id=instance.id %}' type="button" class="btn btn-sm btn-primary"><i class="fa fa-check-square"></i>&nbsp;Validasi</a>
+
+                          {% endif %}
                           <span class="pull-right">
-                              <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
-                              <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                              <!-- <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
+                              <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</a> -->
                           </span>
                       </div>
 
@@ -132,7 +142,7 @@
               <div class="modal fade" id="pot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                   <div class="modal-dialog">
                   <div class="loginmodal-container">
-                    <h1>Bukti Transkrip</h1><br>
+                    <h1>Bukti Penghasilan</h1><br>
                     <img class="img-responsive" src="{{instance.bukti_pot.url}}" />
                   </div>
                 </div>
@@ -141,26 +151,29 @@
               <div class="modal fade" id="tan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                   <div class="modal-dialog">
                   <div class="loginmodal-container">
-                    <h1>Bukti Transkrip</h1><br>
+                    <h1>Bukti Tanggungan</h1><br>
                     <img class="img-responsive" src="{{instance.bukti_tan.url}}" />
                   </div>
                 </div>
                 </div>
-
+                {% if instance.bukti_prestasi %}
               <div class="modal fade" id="prestasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                   <div class="modal-dialog">
                   <div class="loginmodal-container">
-                    <h1>Bukti Transkrip</h1><br>
+                    <h1>Bukti Prestasi</h1><br>
                     <img class="img-responsive" src="{{instance.bukti_prestasi.url}}" />
                   </div>
                 </div>
                 </div>
+                {% endif %}
+                {% if instance.bukti_organisasi %}
                 <div class="modal fade" id="organisasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog">
                     <div class="loginmodal-container">
-                      <h1>Bukti Transkrip</h1><br>
+                      <h1>Bukti Organisasi</h1><br>
                       <img class="img-responsive" src="{{instance.bukti_organisasi.url}}" />
                     </div>
                   </div>
                   </div>
+                {% endif %}
 {% endblock content %}

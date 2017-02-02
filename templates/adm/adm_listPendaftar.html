@@ -10,32 +10,22 @@
 
 <div class="row">
 
-        <nav class="navbar-search query" role="query">
-            <div class="container-fluid">
-                <div class="row row-list-search">
-                <!-- <div class='col-md-1'>
-                </div> -->
-                <div class='col-md-12'>
+        <n<div class="container-fluid" id ="containerPills">
+            <div class="col-md-12">
+              <div class="mailbox-controls">
 
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="javascript:void(0);">Cari Pendaftar</a>
+                  <div class="pull-right">
 
-                </div>
-                <div class="collapse navbar-collapse" id="">
-                    <div class="navbar-form navbar-left">
-                        <input type="text" class="form-control" />
-                        <button class="btn btn-default">Cari !</button>
-                    </div>
-                    <!-- <button class="btn btn-primary create pull-right">添加账号</button> -->
-                </div>
-
-                </div>
-                <!-- <div class='col-md-1'>
-                </div> -->
-                </div>
-
+                      <form class="form-inline" method="GET">
+                          <div class="form-group">
+                              <input type="text" id="kunci" name="kunci" class="form-control input-sm" maxlength="30" placeholder="Masukkan Kunci" />
+                              <button type="submit" class="btn btn-default btn-sm">Cari</button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
             </div>
-        </nav>
+        </div>
         <!-- <div class="col-md-1">
 
       </div> -->
@@ -48,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for obj in object_list %}
+                    {% for obj in instance %}
                     <tr>
                         <td><p>{{obj.nama}}</p></td>
                         <td><p>{{ obj.fakultas }}</p></p></td>
@@ -59,11 +49,9 @@
                         {% endif %}
                         <td><p>{{ obj.prodi }}</p></td>
                         <td class="col-md-2"><p>
-                          {% if obj.valid %}
-                          <button class="btn btn-success" href="" disabled="disabled"><i class="fa fa-check-square-o fa-lg"></i> &nbspValidasi &nbsp;&nbsp;&nbsp;&nbsp;</button>
-                          {% else %}
-                          <a class="btn btn-success" href="{% url 'dashboard:adm_profile_detail' id=obj.id %}"><i class="fa fa-check-square-o fa-lg"></i> &nbspValidasi &nbsp;&nbsp;&nbsp;&nbsp;</a>
-                          {% endif %}
+
+                          <a class="btn btn-success" href="{% url 'dashboard:adm_profile_detail' id=obj.id %}"><i class="fa fa-check-square-o fa-lg"></i> &nbsp;Tinjau &nbsp;&nbsp;&nbsp;&nbsp;</a>
+                          <br /><a class="btn btn-info btn-sm" href="{% url 'dashboard:adm_invalidasi' id=obj.id  %}" id="btnPengumuman" ><i class="fa fa-times fa-lg"></i>&nbsp;Invalidasi&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         </p></td>
                     </tr>
                     {% endfor %}
