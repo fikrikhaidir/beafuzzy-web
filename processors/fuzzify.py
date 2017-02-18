@@ -109,7 +109,7 @@ def fuzzifyTAN(tan):
         else:
             MuSedang = 0
 
-    if (tan >= c3):     #Barrier Ketiga, untuk keanggotaan "Tinggi" dengan asumsi jarang ada yang punya keturunan lebih dari 12
+    if (tan >= a3):
 
         if (tan>=a3 and tan <b3):
             temp1 = tan-a3

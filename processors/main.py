@@ -1,10 +1,10 @@
 from fuzzify import fuzzifyIPK,fuzzifyPOT,fuzzifyTAN,fuzzifyORG,fuzzifyPRE,viewFuzzified
 from rules import rulesMin
 
-ipk = 3.29
-tan = 2
-pot = 2500000
-pre = 0.55
+ipk = 3.1
+tan = 1
+pot = 1000000
+pre = 1.75
 org = 0.55
 
 listIPK,listTAN,listPOT,listORG,listPRE=[],[],[],[],[]

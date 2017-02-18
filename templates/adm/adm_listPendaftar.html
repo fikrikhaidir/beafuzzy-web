@@ -94,7 +94,8 @@
 
                           <a class="btn btn-success" href="{% url 'dashboard:adm_profile_detail' id=obj.id %}"><i class="fa fa-check-square-o fa-lg"></i> &nbsp;Tinjau &nbsp;&nbsp;&nbsp;&nbsp;</a>
                           {% if user.is_superuser %}
-                          <br /><a class="btn btn-info btn-sm" href="{% url 'dashboard:adm_invalidasi' id=obj.id  %}" id="btnPengumuman" ><i class="fa fa-times fa-lg"></i>&nbsp;Invalidasi&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                          <br />
+                          <!-- <a class="btn btn-info btn-sm" href="{% url 'dashboard:adm_invalidasi' id=obj.id  %}" id="btnPengumuman" ><i class="fa fa-times fa-lg"></i>&nbsp;Invalidasi&nbsp;&nbsp;&nbsp;&nbsp;</a> -->
                           {% endif %}
                         </p></td>
                     </tr>

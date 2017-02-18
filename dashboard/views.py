@@ -308,23 +308,23 @@ def cetak_bukti_daftar(request):
     # isi = [],i.prodi,i.nim,i.alamat,i.TanggalLahir,i.semester,i.ipk,i.tan,i.pot
     isi=[]
     for nm in data :
-        isi.append(["Nama :", nm.nama])
+        isi.append(["Nama",":", nm.nama])
     for pro in data :
-        isi.append(["Program Studi :", pro.prodi])
+        isi.append(["Program Studi",":", pro.prodi])
     for n in data :
-        isi.append(["NIM :", n.nim])
+        isi.append(["NIM",":", n.nim])
     for alm in data :
-        isi.append(["Alamat :", alm.alamat])
+        isi.append(["Alamat",":", alm.alamat])
     for tgl in data :
-        isi.append(["Tanggal Lahir :", tgl.TanggalLahir])
+        isi.append(["Tanggal Lahir",":", tgl.TanggalLahir])
     for smt in data :
-        isi.append(["Semester  :", smt.semester])
+        isi.append(["Semester",":", smt.semester])
     for ip in data :
-        isi.append(["IPK :", ip.ipk])
+        isi.append(["IPK",":", ip.ipk])
     for t in data :
-        isi.append(["Tanggungan :", t.tan])
+        isi.append(["Tanggungan",":", t.tan])
     for p in data :
-        isi.append(["Pendapatan Orang Tua (Rp) :", p.pot])
+        isi.append(["Pendapatan Orang Tua (Rp)",":", p.pot])
 
 
 
@@ -339,7 +339,7 @@ def cetak_bukti_daftar(request):
 
 
                            ])
-    pendaftar_table = Table(isi, colWidths=[doc.width/2.0]*4)
+    pendaftar_table = Table(isi)
     pendaftar_table.setStyle(table_style)
 
 

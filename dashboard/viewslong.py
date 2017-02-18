@@ -340,7 +340,7 @@ def cetak_rekap_pendaftar(request):
                                ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
                                ('BOX', (0,0), (-1,-1), 0.25, colors.black),
                            ])
-    pendaftar_table = Table(table_data, colWidths=[doc.width/4.0]*2)
+    pendaftar_table = Table(table_data)
     pendaftar_table.setStyle(table_style)
 
     # mengisi pdf
@@ -367,7 +367,7 @@ def cetak_rekap_diterima(request):
     # mengambil daftar kehadiran dan mengubahnya menjadi data ntuk tabel
     data = hasil_kalkulasi.objects.filter(diterima=True)
     table_data = []
-    table_data.append(["No." "Nama", "NIM","Fakultas","Prodi" ])
+    table_data.append(["No.","Nama", "NIM","Fakultas","Prodi" ])
     nomor = 1
     for x in data:
         table_data.append([nomor, x.nama, x.nim,x.fakultas,x.prodi ])
@@ -386,7 +386,7 @@ def cetak_rekap_diterima(request):
                                ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
                                ('BOX', (0,0), (-1,-1), 0.25, colors.black),
                            ])
-    kehadiran_table = Table(table_data, colWidths=[doc.width/4.0]*2)
+    kehadiran_table = Table(table_data)
     kehadiran_table.setStyle(table_style)
 
     # mengisi pdf
@@ -431,7 +431,7 @@ def cetak_rekapan_ditolak(request):
                                ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
                                ('BOX', (0,0), (-1,-1), 0.25, colors.black),
                            ])
-    kehadiran_table = Table(table_data, colWidths=[doc.width/4.0]*2)
+    kehadiran_table = Table(table_data)
     kehadiran_table.setStyle(table_style)
 
     # mengisi pdf

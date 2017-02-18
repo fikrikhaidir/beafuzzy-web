@@ -237,8 +237,18 @@ def rulesMin(ipk, tan, pot, pre, org):
     r220 = min(potSedang,ipkTinggi,preRendah,tanTinggi,orgRendah)
     r221 = min(potTinggi,ipkSedang,preSedang,tanSedang,orgRendah)
     r222 = min(potRendah,ipkSedang,preSedang,tanSedang,orgRendah)
-
-
+    r223 = min(potTinggi,ipkSedang,preSedang,tanRendah,orgRendah)
+    r224 = min(potSedang,ipkTinggi,preSedang,tanRendah,orgRendah)
+    r225 = min(potSedang,ipkTinggi,preTinggi,tanSedang,orgTinggi)
+    r226 = min(potSedang,ipkTinggi,preRendah,tanSedang,orgRendah)
+    r227 = min(potSedang,ipkSedang,preRendah,tanSedang,orgRendah)
+    r228 = min(potTinggi,ipkSedang,preTinggi,tanTinggi,orgSedang)
+    r223 = min(potTinggi,ipkSedang,preSedang,tanRendah,orgRendah)
+    r224 = min(potSedang,ipkTinggi,preSedang,tanRendah,orgRendah)
+    r225 = min(potSedang,ipkTinggi,preTinggi,tanSedang,orgTinggi)
+    r226 = min(potSedang,ipkTinggi,preRendah,tanSedang,orgRendah)
+    r227 = min(potSedang,ipkSedang,preRendah,tanSedang,orgRendah)
+    r228 = min(potTinggi,ipkSedang,preRendah,tanRendah,orgRendah)
 
 
 
@@ -465,6 +475,13 @@ def rulesMin(ipk, tan, pot, pre, org):
     z220 = sedang
     z221 = sedang
     z222 = sedang
+    z222 = rendah
+    z223 = tinggi
+    z224 = rendah
+    z225 = rendah
+    z226 = rendah
+    z227 = rendah
+    z228 = rendah
 
     # untuk perhitungan alfapredikat dikali dengan z
     zM1=r1*z1
@@ -689,13 +706,35 @@ def rulesMin(ipk, tan, pot, pre, org):
     zM220=r220*z220
     zM221=r221*z221
     zM222=r222*z222
+    zM223 = r223*z223
+    zM224 = r224*z224
+    zM225 = r225*z225
+    zM226 = r226*z226
+    zM227 = r227*z227
+    zM228 = r228*z228
+    # zM229 = r229*z229
+    # zM230 = r230*z230
+    # zM231 = r231*z231
+    # zM232 = r232*z232
+    # zM233 = r233*z233
+    # zM234 = r234*z234
+    # zM235 = r235*z235
+    # zM236 = r236*z236
+    # zM237 = r237*z237
+    # zM238 = r238*z238
+    # zM239 = r239*z239
+    # zM240 = r240*z240
+    # zM241 = r241*z241
+    # zM242 = r242*z242
+    # zM243 = r243*z243
+
 
 
 
     xr = 1
     yr = 'r'
     listR = []
-    for i in range(222):
+    for i in range(228):
         z = yr+str(xr)
         try:
             print z+" : ",eval(z)
@@ -707,7 +746,7 @@ def rulesMin(ipk, tan, pot, pre, org):
     xz = 1
     yz = 'zM'
     listZ = []
-    for i in range(222):
+    for i in range(228):
         z = yz+str(xz)
         try:
             print z+" : ",eval(z)
